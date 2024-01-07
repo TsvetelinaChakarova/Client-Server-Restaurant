@@ -3,21 +3,18 @@ package bg.restaurant.systems.software.integration.design.command;
 import java.util.Arrays;
 
 public enum CommandType {
-    REGISTER("register"),
-    LOGIN("login"),
-    LOGOUT("logout"),
-    NEW_GROUP("new-group"),
-    ADD_TO("add-to"),
-    SHORTEN("--shorten"),
-    REMOVE_FROM("remove-from"),
-    LIST("list"),
-    GROUP_NAME("--group-name"),
-    SEARCH("search"),
-    TAGS("--tags"),
-    TITLE("--title"),
-    CLEANUP("cleanup"),
-    IMPORT_FROM_CHROME("import-from-chrome"),
-    GET_CHROME_BOOKMARKS("get-chrome-bookmarks"),
+    GET("get"),
+    RECIPES("recipes"),
+    ALL("--all"),
+    TYPE("--type"),
+    INGREDIENTS("--ingredients"),
+    FILE("file"),
+    RECIPE_NAME("--recipe_name"),
+    DRINKS("drinks"),
+    ALLERGENS("allergens"),
+    LIST_ALLERGENS("--allergens"),
+    PREPARATION_TIME("prep_time"),
+    SERVE_WAY("serve_way"),
     UNKNOWN("unknown");
 
     private final String commandType;

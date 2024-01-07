@@ -61,7 +61,7 @@ public class Server extends Thread {
                             }
 
                             String output =
-                                commandExecutor.execute(CommandCreator.newCommand(clientInput), clientChannel);
+                                commandExecutor.execute(CommandCreator.newCommand(clientInput));
                             writeClientOutput(clientChannel, output);
 
                         } else if (key.isAcceptable()) {
