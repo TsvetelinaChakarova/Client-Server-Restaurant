@@ -16,7 +16,7 @@ public class Client {
 
     private static void printRestaurantInfo() {
         System.out.println("Welcome to the restaurant BECI!\nHere is the menu:");
-        System.out.println("-------------------------------------------MENU-------------------------------------------");
+        System.out.println("------------------------------------------MENU------------------------------------------");
         System.out.println("Recipes");
         System.out.println("Get all recipes -> get recipes --all");
         System.out.println("Get all recipes by recipe type -> get recipes --type [\"breakfast\", \"lunch\", ...]");
@@ -35,7 +35,7 @@ public class Client {
         System.out.println("Get preparation time for certain recipe -> get prep_time --recipe_name \"...\"\n");
         System.out.println("Serve Way");
         System.out.println("Get how recipe is served -> get serve_way --recipe_name \"...\"");
-        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------");
 
         System.out.println("Please enjoy your meal!");
     }
@@ -75,7 +75,7 @@ public class Client {
 
                 //String reply = new String(buffer.array(), 0, buffer.position(), "UTF-8"); // buffer drain
 
-                System.out.println("The server replied {" + reply + "}");
+                System.out.println("The server replied {" + reply + "}\n");
             }
 
         } catch (IOException e) {
