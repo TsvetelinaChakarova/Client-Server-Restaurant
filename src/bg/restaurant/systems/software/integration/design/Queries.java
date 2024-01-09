@@ -1,6 +1,4 @@
-package bg.restaurant.systems.software.integration.design.storage;
-
-import bg.restaurant.systems.software.integration.design.DatabaseConnection;
+package bg.restaurant.systems.software.integration.design;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
