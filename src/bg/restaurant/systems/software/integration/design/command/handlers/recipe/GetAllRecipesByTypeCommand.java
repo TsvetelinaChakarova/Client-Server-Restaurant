@@ -2,14 +2,14 @@ package bg.restaurant.systems.software.integration.design.command.handlers.recip
 
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 public class GetAllRecipesByTypeCommand extends CommandsValidator implements CommandHandler {
-    private final CocktailStorage cocktailStorage;
+    private final Restaurant restaurant;
     private final String[] args;
 
-    public GetAllRecipesByTypeCommand(CocktailStorage cocktailStorage, String[] args) {
-        this.cocktailStorage = cocktailStorage;
+    public GetAllRecipesByTypeCommand(Restaurant restaurant, String[] args) {
+        this.restaurant = restaurant;
         this.args = args;
     }
 

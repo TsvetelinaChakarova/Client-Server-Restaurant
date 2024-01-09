@@ -2,15 +2,15 @@ package bg.restaurant.systems.software.integration.design.command.handlers.recip
 
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 import java.util.Arrays;
 
 public class RecipeCommandExecutor extends CommandExecutorValidator {
-    private final CocktailStorage cocktailStorage;
+    private final Restaurant restaurant;
 
-    public RecipeCommandExecutor(CocktailStorage cocktailStorage) {
-        this.cocktailStorage = cocktailStorage;
+    public RecipeCommandExecutor(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public String execute(String... arguments) {
@@ -18,15 +18,15 @@ public class RecipeCommandExecutor extends CommandExecutorValidator {
         CommandType commandType = CommandType.getCommandType(arguments[0]);
 
         return switch (commandType) {
-            case ALL -> new GetAllRecipesCommand(cocktailStorage).execute();
+            case ALL -> new GetAllRecipesCommand(restaurant).execute();
             case TYPE ->
-                new GetAllRecipesByTypeCommand(cocktailStorage,
+                new GetAllRecipesByTypeCommand(restaurant,
                     Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             case LIST_INGREDIENTS ->
-                new GetAllRecipesByIngredientsCommand(cocktailStorage,
+                new GetAllRecipesByIngredientsCommand(restaurant,
                     Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             case LIST_ALLERGENS ->
-                new GetAllRecipesByAllergensCommand(cocktailStorage,
+                new GetAllRecipesByAllergensCommand(restaurant,
                     Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             default -> "Unknown command";
         };

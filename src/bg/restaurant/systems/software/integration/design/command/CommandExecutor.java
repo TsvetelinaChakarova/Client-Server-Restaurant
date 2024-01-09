@@ -8,15 +8,15 @@ import bg.restaurant.systems.software.integration.design.command.handlers.prepar
 import bg.restaurant.systems.software.integration.design.command.handlers.recipe.RecipeCommandExecutor;
 import bg.restaurant.systems.software.integration.design.command.handlers.serving.GetServingWayByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 public class CommandExecutor extends CommandExecutorValidator {
-    private final CocktailStorage cocktailStorage;
+    private final Restaurant restaurant;
 
-    public CommandExecutor(CocktailStorage cocktailStorage) {
-        validateConstructorParameter(cocktailStorage);
+    public CommandExecutor(Restaurant restaurant) {
+        validateConstructorParameter(restaurant);
 
-        this.cocktailStorage = cocktailStorage;
+        this.restaurant = restaurant;
     }
 
     public String execute(Command cmd) {
@@ -26,14 +26,14 @@ public class CommandExecutor extends CommandExecutorValidator {
             CommandType commandType = CommandType.getCommandType(cmd.command());
 
             return switch (commandType) {
-                case RECIPES -> new RecipeCommandExecutor(cocktailStorage).execute(cmd.arguments());
-                case DRINKS -> new DrinkCommandExecutor(cocktailStorage).execute(cmd.arguments());
-                case FILE -> new GetFileWithRecipeCommand(cocktailStorage, cmd.arguments()).execute();
-                case INGREDIENTS -> new GetIngredientsByRecipeNameCommand(cocktailStorage, cmd.arguments()).execute();
-                case ALLERGENS -> new GetAllergensByRecipeNameCommand(cocktailStorage, cmd.arguments()).execute();
+                case RECIPES -> new RecipeCommandExecutor(restaurant).execute(cmd.arguments());
+                case DRINKS -> new DrinkCommandExecutor(restaurant).execute(cmd.arguments());
+                case FILE -> new GetFileWithRecipeCommand(restaurant, cmd.arguments()).execute();
+                case INGREDIENTS -> new GetIngredientsByRecipeNameCommand(restaurant, cmd.arguments()).execute();
+                case ALLERGENS -> new GetAllergensByRecipeNameCommand(restaurant, cmd.arguments()).execute();
                 case PREPARATION_TIME ->
-                    new GetPreparationTimeForRecipeByNameCommand(cocktailStorage, cmd.arguments()).execute();
-                case SERVE_WAY -> new GetServingWayByRecipeNameCommand(cocktailStorage, cmd.arguments()).execute();
+                    new GetPreparationTimeForRecipeByNameCommand(restaurant, cmd.arguments()).execute();
+                case SERVE_WAY -> new GetServingWayByRecipeNameCommand(restaurant, cmd.arguments()).execute();
                 default -> "Unknown command";
             };
         } catch (Exception e) {

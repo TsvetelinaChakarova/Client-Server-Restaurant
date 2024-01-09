@@ -2,15 +2,15 @@ package bg.restaurant.systems.software.integration.design.command.handlers.drink
 
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 import java.util.Arrays;
 
 public class DrinkCommandExecutor extends CommandExecutorValidator {
-    private final CocktailStorage cocktailStorage;
+    private final Restaurant restaurant;
 
-    public DrinkCommandExecutor(CocktailStorage cocktailStorage) {
-        this.cocktailStorage = cocktailStorage;
+    public DrinkCommandExecutor(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public String execute(String... arguments) {
@@ -18,9 +18,9 @@ public class DrinkCommandExecutor extends CommandExecutorValidator {
         CommandType commandType = CommandType.getCommandType(arguments[0]);
 
         return switch (commandType) {
-            case ALL -> new GetAllDrinksCommand(cocktailStorage).execute();
+            case ALL -> new GetAllDrinksCommand(restaurant).execute();
             case RECIPE_NAME ->
-                new GetAllDrinksByRecipeName(cocktailStorage,
+                new GetAllDrinksByRecipeName(restaurant,
                     Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             default -> "Unknown command";
         };

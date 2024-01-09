@@ -19,7 +19,7 @@ public class Server extends Thread {
     private static final String HOST = "localhost";
     private final CommandExecutor commandExecutor;
     //    private final UserDatabase userDatabase;
-//    private final BookmarkDatabase bookmarkDatabase;
+    //    private final BookmarkDatabase bookmarkDatabase;
     private final int port;
     private boolean isServerWorking;
     private ByteBuffer buffer;
