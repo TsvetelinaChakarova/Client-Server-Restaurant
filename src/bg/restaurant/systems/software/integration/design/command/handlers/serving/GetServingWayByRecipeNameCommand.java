@@ -1,15 +1,16 @@
-package bg.restaurant.systems.software.integration.design.command.handlers.drink;
+package bg.restaurant.systems.software.integration.design.command.handlers.serving;
 
+import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
 
-public class GetAllDrinksByRecipeName extends CommandsValidator implements CommandHandler {
+public class GetServingWayByRecipeNameCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 2;
     private final CocktailStorage cocktailStorage;
     private final String[] args;
 
-    public GetAllDrinksByRecipeName(CocktailStorage cocktailStorage, String[] args) {
+    public GetServingWayByRecipeNameCommand(CocktailStorage cocktailStorage, String[] args) {
         this.cocktailStorage = cocktailStorage;
         this.args = args;
     }
@@ -17,9 +18,12 @@ public class GetAllDrinksByRecipeName extends CommandsValidator implements Comma
     @Override
     public String execute() {
         try {
-            validateArgumentsLength(args);
+            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
+            if (!areCommandTypeEqual(args[0], CommandType.RECIPE_NAME)) {
+                return "Unknown Command";
+            }
 
-            return args[0];
+            return args[1] + " | Serve_way";
         } catch (Exception e) {
             return e.getMessage();
         }

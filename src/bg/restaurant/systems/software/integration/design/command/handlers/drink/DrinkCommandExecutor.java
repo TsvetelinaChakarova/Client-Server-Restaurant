@@ -20,7 +20,8 @@ public class DrinkCommandExecutor extends CommandExecutorValidator {
         return switch (commandType) {
             case ALL -> new GetAllDrinksCommand(cocktailStorage).execute();
             case RECIPE_NAME ->
-                new GetAllDrinksByRecipeName(Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
+                new GetAllDrinksByRecipeName(cocktailStorage,
+                    Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             default -> "Unknown command";
         };
     }

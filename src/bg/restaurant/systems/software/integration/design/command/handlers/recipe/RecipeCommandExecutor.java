@@ -20,11 +20,14 @@ public class RecipeCommandExecutor extends CommandExecutorValidator {
         return switch (commandType) {
             case ALL -> new GetAllRecipesCommand(cocktailStorage).execute();
             case TYPE ->
-                new GetAllRecipesByTypeCommand(Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
+                new GetAllRecipesByTypeCommand(cocktailStorage,
+                    Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             case INGREDIENTS ->
-                new GetAllRecipesByIngredientsCommand(Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
+                new GetAllRecipesByIngredientsCommand(cocktailStorage,
+                    Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             case LIST_ALLERGENS ->
-                new GetAllRecipesByAllergensCommand(Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
+                new GetAllRecipesByAllergensCommand(cocktailStorage,
+                    Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             default -> "Unknown command";
         };
     }

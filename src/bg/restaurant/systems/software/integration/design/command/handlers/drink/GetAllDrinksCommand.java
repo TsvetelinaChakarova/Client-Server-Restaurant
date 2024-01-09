@@ -1,9 +1,11 @@
 package bg.restaurant.systems.software.integration.design.command.handlers.drink;
 
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
+import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
 
-public class GetAllDrinksCommand implements CommandHandler {
+public class GetAllDrinksCommand extends CommandsValidator implements CommandHandler {
+    private static final int NUMBER_OF_COMMAND_ARGS = 0;
     private final CocktailStorage cocktailStorage;
 
     public GetAllDrinksCommand(CocktailStorage cocktailStorage) {
@@ -12,6 +14,12 @@ public class GetAllDrinksCommand implements CommandHandler {
 
     @Override
     public String execute() {
-        return "Drinks";
+        try {
+            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS);
+
+            return "Drinks";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }
