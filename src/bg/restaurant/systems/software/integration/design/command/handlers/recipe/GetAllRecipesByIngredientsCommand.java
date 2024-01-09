@@ -5,7 +5,6 @@ import bg.restaurant.systems.software.integration.design.command.validators.Comm
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 public class GetAllRecipesByIngredientsCommand extends CommandsValidator implements CommandHandler {
-//    private static final int NUMBER_OF_COMMAND_ARGS = 2;
     private final Restaurant restaurant;
     private final String[] args;
 

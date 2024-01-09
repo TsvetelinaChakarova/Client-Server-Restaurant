@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Client {
@@ -12,7 +13,7 @@ public class Client {
     private static final String SERVER_HOST = "localhost";
     private static final int BUFFER_SIZE = 1024;
 
-    private static ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
+    private static final ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
 
     private static void printRestaurantInfo() {
         System.out.println("Welcome to the restaurant BECI!\nHere is the menu:");
@@ -71,7 +72,7 @@ public class Client {
 
                 byte[] byteArray = new byte[buffer.remaining()];
                 buffer.get(byteArray);
-                String reply = new String(byteArray, "UTF-8");
+                String reply = new String(byteArray, StandardCharsets.UTF_8);
 
                 //String reply = new String(buffer.array(), 0, buffer.position(), "UTF-8"); // buffer drain
 

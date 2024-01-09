@@ -16,7 +16,7 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
     @Override
     public String execute() {
         try {
-            validateForSufficientNumberOfArguments(0);
+            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS);
 
             return "Recipes";
         } catch (Exception e) {
