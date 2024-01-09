@@ -5,16 +5,17 @@ import java.util.Arrays;
 public enum CommandType {
     GET("get"),
     RECIPES("recipes"),
-    ALL("--all"),
-    TYPE("--type"),
-    INGREDIENTS("--ingredients"),
-    FILE("file"),
-    RECIPE_NAME("--recipe_name"),
     DRINKS("drinks"),
+    INGREDIENTS("ingredients"),
     ALLERGENS("allergens"),
-    LIST_ALLERGENS("--allergens"),
     PREPARATION_TIME("prep_time"),
     SERVE_WAY("serve_way"),
+    FILE("file"),
+    ALL("--all"),
+    TYPE("--type"),
+    LIST_INGREDIENTS("--ingredients"),
+    RECIPE_NAME("--recipe_name"),
+    LIST_ALLERGENS("--allergens"),
     UNKNOWN("unknown");
 
     private final String commandType;

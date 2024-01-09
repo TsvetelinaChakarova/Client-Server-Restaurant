@@ -22,7 +22,7 @@ public class RecipeCommandExecutor extends CommandExecutorValidator {
             case TYPE ->
                 new GetAllRecipesByTypeCommand(cocktailStorage,
                     Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
-            case INGREDIENTS ->
+            case LIST_INGREDIENTS ->
                 new GetAllRecipesByIngredientsCommand(cocktailStorage,
                     Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             case LIST_ALLERGENS ->
