@@ -2,15 +2,15 @@ package bg.restaurant.systems.software.integration.design.command.handlers.recip
 
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 public class GetAllRecipesCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 0;
 
-    private final CocktailStorage cocktailStorage;
+    private final Restaurant restaurant;
 
-    public GetAllRecipesCommand(CocktailStorage cocktailStorage) {
-        this.cocktailStorage = cocktailStorage;
+    public GetAllRecipesCommand(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

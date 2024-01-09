@@ -1,7 +1,7 @@
 package bg.restaurant.systems.software.integration.design.command.validators;
 
 import bg.restaurant.systems.software.integration.design.command.Command;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
 public class CommandExecutorValidator {
     protected void validateArgumentsLength(String ... args) {
@@ -10,8 +10,8 @@ public class CommandExecutorValidator {
         }
     }
 
-    protected void validateConstructorParameter(CocktailStorage cocktailStorage) {
-        if (cocktailStorage == null) {
+    protected void validateConstructorParameter(Restaurant restaurant) {
+        if (restaurant == null) {
             throw new IllegalArgumentException("The restaurant cannot be null!");
         }
     }

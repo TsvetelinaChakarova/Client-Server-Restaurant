@@ -1,8 +1,8 @@
 package bg.restaurant.systems.software.integration.design.server;
 
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
-import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
-import bg.restaurant.systems.software.integration.design.storage.DefaultCocktailStorage;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+import bg.restaurant.systems.software.integration.design.storage.DefaultRestaurant;
 
 import java.util.Scanner;
 
@@ -12,9 +12,9 @@ public class AdminPanel {
 
         //ErrorLogs errorLogs = new ErrorLogs("src/bg/sofia/uni/fmi/mjt/bookmarks/repository/logs/logs.txt");
 
-        CocktailStorage cocktailStorage = new DefaultCocktailStorage();
+        Restaurant restaurant = new DefaultRestaurant();
 
-        Server server = new Server(serverPortNumber, new CommandExecutor(cocktailStorage));
+        Server server = new Server(serverPortNumber, new CommandExecutor(restaurant));
 
         Scanner adminInput = new Scanner(System.in);
         String adminCommand;
