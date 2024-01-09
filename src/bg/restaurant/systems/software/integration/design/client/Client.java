@@ -14,6 +14,32 @@ public class Client {
 
     private static ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
 
+    private static void printRestaurantInfo() {
+        System.out.println("Welcome to the restaurant BECI!\nHere is the menu:");
+        System.out.println("-------------------------------------------MENU-------------------------------------------");
+        System.out.println("Recipes");
+        System.out.println("Get all recipes -> get recipes --all");
+        System.out.println("Get all recipes by recipe type -> get recipes --type [\"breakfast\", \"lunch\", ...]");
+        System.out.println("Get all recipes with certain ingredient -> get recipes --ingredients [\"salt\",\"pepper\", ...]");
+        System.out.println("Get all recipes with certain allergen -> get recipes --allergens [\"milk\", \"gluten\", ...]\n");
+        System.out.println("Drinks");
+        System.out.println("Get all drinks -> get drinks --all");
+        System.out.println("Get suitable drinks for recipe -> get drinks --recipe_name \"...\"\n");
+        System.out.println("Files");
+        System.out.println("Get file with certain recipe -> get file --recipe_name \"...\"\n");
+        System.out.println("Allergens");
+        System.out.println("Get allergens for certain recipe -> get allergens --recipe_name \"...\"\n");
+        System.out.println("Ingredients");
+        System.out.println("Get all ingredients for recipe -> get ingredients --recipe_name \"...\"\n");
+        System.out.println("Preparation");
+        System.out.println("Get preparation time for certain recipe -> get prep_time --recipe_name \"...\"\n");
+        System.out.println("Serve Way");
+        System.out.println("Get how recipe is served -> get serve_way --recipe_name \"...\"");
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        System.out.println("Please enjoy your meal!");
+    }
+
     public static void main(String[] args) {
 
         try (SocketChannel socketChannel = SocketChannel.open();
@@ -22,6 +48,7 @@ public class Client {
             socketChannel.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
 
             System.out.println("Connected to the server.");
+            printRestaurantInfo();
 
             while (true) {
                 System.out.print("Enter message: ");
@@ -31,7 +58,7 @@ public class Client {
                     break;
                 }
 
-                System.out.println("Sending message {" + message + "} to the server...");
+                //System.out.println("Sending message {" + message + "} to the server...");
 
                 buffer.clear();
                 buffer.put(message.getBytes());
