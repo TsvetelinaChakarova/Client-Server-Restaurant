@@ -5,6 +5,8 @@ import bg.restaurant.systems.software.integration.design.command.validators.Comm
 import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
 
 public class GetAllRecipesCommand extends CommandsValidator implements CommandHandler {
+    private static final int NUMBER_OF_COMMAND_ARGS = 0;
+
     private final CocktailStorage cocktailStorage;
 
     public GetAllRecipesCommand(CocktailStorage cocktailStorage) {
@@ -13,6 +15,12 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
 
     @Override
     public String execute() {
-        return "Recipes";
+        try {
+            validateForSufficientNumberOfArguments(0);
+
+            return "Recipes";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }

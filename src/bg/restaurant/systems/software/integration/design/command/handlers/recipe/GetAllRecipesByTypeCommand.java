@@ -2,18 +2,25 @@ package bg.restaurant.systems.software.integration.design.command.handlers.recip
 
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
+import bg.restaurant.systems.software.integration.design.storage.CocktailStorage;
 
 public class GetAllRecipesByTypeCommand extends CommandsValidator implements CommandHandler {
+    private final CocktailStorage cocktailStorage;
     private final String[] args;
 
-    public GetAllRecipesByTypeCommand(String[] args) {
+    public GetAllRecipesByTypeCommand(CocktailStorage cocktailStorage, String[] args) {
+        this.cocktailStorage = cocktailStorage;
         this.args = args;
     }
 
     @Override
     public String execute() {
-        validateArgumentsLength(args);
+        try {
+            validateArgumentsLength(args);
 
-        return args[0];
+            return args[0];
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }

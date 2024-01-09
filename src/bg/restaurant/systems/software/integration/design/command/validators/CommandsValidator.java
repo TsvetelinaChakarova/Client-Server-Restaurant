@@ -23,7 +23,7 @@ public class CommandsValidator {
         }
     }
 
-    private boolean areCommandTypeEqual(String currentType, CommandType neededType) {
+    protected boolean areCommandTypeEqual(String currentType, CommandType neededType) {
         return CommandType.getCommandType(currentType).equals(neededType);
     }
 

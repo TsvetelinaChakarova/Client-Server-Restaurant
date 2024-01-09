@@ -17,10 +17,15 @@ public class GetServingWayByRecipeNameCommand extends CommandsValidator implemen
 
     @Override
     public String execute() {
-        validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
-        validateThatContainsOneArgument(args);
-        validateCommandType(args[0], CommandType.RECIPE_NAME);
+        try {
+            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
+            if (!areCommandTypeEqual(args[0], CommandType.RECIPE_NAME)) {
+                return "Unknown Command";
+            }
 
-        return args[1] + " | Serve_way";
+            return args[1] + " | Serve_way";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }
