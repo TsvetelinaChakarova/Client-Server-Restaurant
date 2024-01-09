@@ -19,7 +19,7 @@ public class CommandsValidator {
 
     protected void validateCommandType(String currentType, CommandType neededType) {
         if (!areCommandTypeEqual(currentType, neededType)) {
-            throw new IllegalArgumentException("The command argument must be like: " + neededType.toString() + "!");
+            throw new IllegalArgumentException("The command argument must be like: " + neededType.toString());
         }
     }
 
@@ -29,7 +29,7 @@ public class CommandsValidator {
 
     protected void validateForSufficientNumberOfArguments(int argsNumber, String... args) {
         if (args.length != argsNumber) {
-            throw new IllegalArgumentException("The number of arguments for this command must be " + argsNumber +"!");
+            throw new IllegalArgumentException("The number of arguments for this command must be " + argsNumber);
         }
     }
 }
