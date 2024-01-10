@@ -2,7 +2,7 @@ package bg.restaurant.systems.software.integration.design.storage;
 
 import bg.restaurant.systems.software.integration.design.storage.exceptions.RecipeAlreadyExistsException;
 import bg.restaurant.systems.software.integration.design.storage.exceptions.RecipeNotFoundException;
-import bg.restaurant.systems.software.integration.design.Recipe;
+import bg.restaurant.systems.software.integration.design.data.Recipe;
 
 import java.util.Collection;
 import java.util.HashSet;
