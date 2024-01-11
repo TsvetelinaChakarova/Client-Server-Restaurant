@@ -15,6 +15,9 @@ import java.util.Set;
 
 public class Queries {
     private final DatabaseConnection databaseConnection;
+    private static final String TYPE = "type";
+    private static final String SERVER_STYLE = "serve_style";
+    private static final String PREPARATION_TIME = "preparation_time";
 
     public Queries(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -51,9 +54,9 @@ public class Queries {
 
             resultSet.next();
 
-            RecipeType type = RecipeType.getRecipeType(resultSet.getString("type"));
-            ServeStyle serveStyle = ServeStyle.getType(resultSet.getString("serve_style"));
-            int preparationTime = resultSet.getInt("preparation_time");
+            RecipeType type = RecipeType.getRecipeType(resultSet.getString(TYPE));
+            ServeStyle serveStyle = ServeStyle.getType(resultSet.getString(SERVER_STYLE));
+            int preparationTime = resultSet.getInt(PREPARATION_TIME);
 
             recipes.add(new Recipe(recipeName,
                     type,
@@ -127,7 +130,7 @@ public class Queries {
 
         ServeStyle serveStyle = null;
         while (resultSet.next()) {
-            serveStyle = ServeStyle.getType(resultSet.getString("serve_style"));
+            serveStyle = ServeStyle.getType(resultSet.getString(SERVER_STYLE));
         }
 
         resultSet.close();
@@ -142,7 +145,7 @@ public class Queries {
 
         int preparationTime = 0;
         while (resultSet.next()) {
-            preparationTime = resultSet.getInt("preparation_time");
+            preparationTime = resultSet.getInt(PREPARATION_TIME);
         }
 
         resultSet.close();
