@@ -4,7 +4,8 @@ import java.util.Arrays;
 public enum RecipeType {
     SOUP("soup"),
     MAIN_COURSE("main-course"),
-    DESERT("DESERT"),
+    DESERT("dessert"),
+    BREAKFAST("breakfast"),
     UNKNOWN("unknown");
 
     private final String recipeType;

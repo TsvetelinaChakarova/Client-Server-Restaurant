@@ -5,7 +5,6 @@ import java.sql.*;
 public class DatabaseConnection {
     private Connection connection;
     private Statement statement;
-    private ResultSet resultSet;
     private static final String CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
     public DatabaseConnection(String url, String user, String password) {
@@ -21,6 +20,7 @@ public class DatabaseConnection {
     }
 
     public ResultSet executeQuery(String query) {
+        ResultSet resultSet = null;
         try {
             resultSet = statement.executeQuery(query);
         } catch (Exception exception) {
@@ -34,7 +34,6 @@ public class DatabaseConnection {
         try {
             statement.close();
             connection.close();
-            resultSet.close();
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

@@ -1,6 +1,7 @@
 package bg.restaurant.systems.software.integration.design.data;
 
 import java.util.Set;
+
 public record Recipe(String name, RecipeType type, ServeStyle serveStyle,
                      Set<Ingredient> ingredients, int preparationTime,
                      Set<Allergen> allergens, Set<Drink> suitableDrinks) {
@@ -26,5 +27,4 @@ public record Recipe(String name, RecipeType type, ServeStyle serveStyle,
             throw new IllegalArgumentException("The preparationTime cannot be zero or less than zero!");
         }
     }
-
 }
