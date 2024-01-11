@@ -1,12 +1,23 @@
 package bg.restaurant.systems.software.integration.design;
 
+import bg.restaurant.systems.software.integration.design.data.Allergen;
+import bg.restaurant.systems.software.integration.design.data.Drink;
+import bg.restaurant.systems.software.integration.design.data.Ingredient;
+import bg.restaurant.systems.software.integration.design.data.Recipe;
+import bg.restaurant.systems.software.integration.design.data.RecipeType;
+import bg.restaurant.systems.software.integration.design.data.ServeStyle;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Queries {
     private final DatabaseConnection databaseConnection;
+    private static final String TYPE = "type";
+    private static final String SERVER_STYLE = "serve_style";
+    private static final String PREPARATION_TIME = "preparation_time";
 
     public Queries(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -27,89 +38,133 @@ public class Queries {
         return elementsForQuery;
     }
 
-    public void getAllRecipes() {
-        ResultSet resultSet = databaseConnection.executeQuery("SELECT * FROM recipes");
+    private Set<Recipe> getRecipesForQueries(ResultSet resultSet) throws SQLException {
+        Set<String> recipeNames = new HashSet<>();
+        while (resultSet.next()) {
+            recipeNames.add(resultSet.getString("name"));
+        }
+        resultSet.close();
+
+        Set<Recipe> recipes = new HashSet<>();
+        for (String recipeName : recipeNames) {
+            resultSet = databaseConnection.executeQuery("""
+                    SELECT * FROM recipes
+                    WHERE name = \"""" +
+                    recipeName + "\"");
+
+            resultSet.next();
+
+            RecipeType type = RecipeType.getRecipeType(resultSet.getString(TYPE));
+            ServeStyle serveStyle = ServeStyle.getType(resultSet.getString(SERVER_STYLE));
+            int preparationTime = resultSet.getInt(PREPARATION_TIME);
+
+            recipes.add(new Recipe(recipeName,
+                    type,
+                    serveStyle,
+                    getIngredientsByRecipeName(recipeName),
+                    preparationTime,
+                    getAllergensByRecipeName(recipeName),
+                    getAllDrinksByRecipeName(recipeName)));
+        }
+
+        resultSet.close();
+        return recipes;
     }
 
-    public void getAllRecipesByAllergens(Collection<String> allergens) {
-        StringBuilder query = new StringBuilder("""
+    public Set<Recipe> getAllRecipes() throws SQLException {
+        ResultSet resultSet = databaseConnection.executeQuery(
+                "SELECT * FROM recipes");
+
+        return getRecipesForQueries(resultSet);
+    }
+
+    public Set<Recipe> getAllRecipesByAllergens(Collection<String> allergens) throws SQLException {
+        String query = """
                 SELECT * FROM recipes
                 WHERE id IN (
                         SELECT recipe_id FROM allergens_for_recipe
                         WHERE allergen_id IN (
                                 SELECT id FROM allergens
                                 WHERE name IN (
-                                                """);
+                                                """ + makeCollectionStringForQuery(allergens) +
+                ")))";
 
-        query.append(makeCollectionStringForQuery(allergens));
-        query.append(")))");
+        ResultSet resultSet = databaseConnection.executeQuery(query);
 
-        ResultSet resultSet = databaseConnection.executeQuery(query.toString());
-
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("name"));
-//        }
+        return getRecipesForQueries(resultSet);
     }
 
-    public void getAllRecipesByIngredients(Collection<String> ingredients) throws SQLException {
-        StringBuilder query = new StringBuilder("""
+    public Set<Recipe> getAllRecipesByIngredients(Collection<String> ingredients) throws SQLException {
+        String query = """
                 SELECT * FROM recipes
                 WHERE id IN (
                         SELECT recipe_id FROM ingredients_for_recipe
                         WHERE ingredient_id IN (
                                 SELECT id FROM ingredients
                                 WHERE name IN (
-                                                """);
+                                                """ + makeCollectionStringForQuery(ingredients) +
+                ")))";
 
-        query.append(makeCollectionStringForQuery(ingredients));
-        query.append(")))");
+        ResultSet resultSet = databaseConnection.executeQuery(String.valueOf(query));
 
-        ResultSet resultSet = databaseConnection.executeQuery(query.toString());
+        return getRecipesForQueries(resultSet);
     }
 
-    public void getAllRecipesByType(Collection<String> types) throws SQLException {
-        StringBuilder query = new StringBuilder("""
+    public Set<Recipe> getAllRecipesByType(Collection<String> types) throws SQLException {
+        String query = """
                 SELECT * FROM recipes
                 WHERE type IN (
-                                """);
+                                """ + makeCollectionStringForQuery(types) +
+                ")";
 
-        query.append(makeCollectionStringForQuery(types));
-        query.append(")");
+        ResultSet resultSet = databaseConnection.executeQuery(query);
 
-        ResultSet resultSet = databaseConnection.executeQuery(query.toString());
-
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("name"));
-//        }
+        return getRecipesForQueries(resultSet);
     }
 
-    public void getServingWayByRecipeName(String recipeName) throws SQLException {
+    public ServeStyle getServingWayByRecipeName(String recipeName) throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery("""
                 SELECT serve_style FROM recipes
                 WHERE name = \"""" +
                 recipeName + "\"");
 
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("serve_style"));
-//        }
+        ServeStyle serveStyle = null;
+        while (resultSet.next()) {
+            serveStyle = ServeStyle.getType(resultSet.getString(SERVER_STYLE));
+        }
+
+        resultSet.close();
+        return serveStyle;
     }
 
-    public void getPreparationTimeForRecipeByName(String recipeName) throws SQLException {
+    public int getPreparationTimeForRecipeByName(String recipeName) throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery("""
                 SELECT preparation_time FROM recipes
                 WHERE name = \"""" +
                 recipeName + "\"");
 
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("preparation_time"));
-//        }
+        int preparationTime = 0;
+        while (resultSet.next()) {
+            preparationTime = resultSet.getInt(PREPARATION_TIME);
+        }
+
+        resultSet.close();
+        return preparationTime;
     }
 
-    public void getAllDrinks() {
-        databaseConnection.executeQuery("select * from drinks");
+    public Set<Drink> getAllDrinks() throws SQLException {
+        ResultSet resultSet = databaseConnection.executeQuery("select * from drinks");
+
+        Set<Drink> drinks = new HashSet<>();
+        while (resultSet.next()) {
+            drinks.add(Drink.of(resultSet));
+        }
+
+        resultSet.close();
+        return drinks;
     }
 
-    public void getAllDrinksByRecipeName(String recipeName) throws SQLException {
+    public Set<Drink> getAllDrinksByRecipeName(String recipeName) throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery("""             
                 SELECT * FROM drinks
                 WHERE id = (
@@ -117,14 +172,18 @@ public class Queries {
                         WHERE recipe_id = (
                             SELECT id FROM recipes
                             WHERE name = \"""" +
-                            recipeName + "\"))");
+                recipeName + "\"))");
 
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("name"));
-//        }
+        Set<Drink> drinks = new HashSet<>();
+        while (resultSet.next()) {
+            drinks.add(Drink.of(resultSet));
+        }
+
+        resultSet.close();
+        return drinks;
     }
 
-    public void getAllergensByRecipeName(String recipeName) throws SQLException {
+    public Set<Allergen> getAllergensByRecipeName(String recipeName) throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery("""             
                 SELECT * FROM allergens
                 WHERE id IN (
@@ -132,14 +191,18 @@ public class Queries {
                         WHERE recipe_id IN (
                                 SELECT id FROM recipes
                                 WHERE name = \"""" +
-                                recipeName + "\"))");
+                recipeName + "\"))");
 
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("name"));
-//        }
+        Set<Allergen> allergens = new HashSet<>();
+        while (resultSet.next()) {
+            allergens.add(new Allergen(resultSet.getString("name")));
+        }
+
+        resultSet.close();
+        return allergens;
     }
 
-    public void getIngredientsByRecipeName(String recipeName) throws SQLException {
+    public Set<Ingredient> getIngredientsByRecipeName(String recipeName) throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery("""             
                 SELECT * FROM ingredients
                 WHERE id IN (
@@ -149,9 +212,13 @@ public class Queries {
                                 WHERE name = \"""" +
                 recipeName + "\"))");
 
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("name"));
-//        }
+        Set<Ingredient> ingredients = new HashSet<>();
+        while (resultSet.next()) {
+            ingredients.add(new Ingredient(resultSet.getString("name")));
+        }
+
+        resultSet.close();
+        return ingredients;
     }
 
     public static void main(String[] args) throws SQLException {
@@ -159,8 +226,18 @@ public class Queries {
                 "jdbc:mysql://localhost:3306/restaurants", "root", "");
 
         Queries queries = new Queries(databaseConnection);
-        queries.getAllRecipesByType(List.of("dessert", "breakfast"));
+        System.out.println(queries.getServingWayByRecipeName("cake"));
+        System.out.println(queries.getPreparationTimeForRecipeByName("cake"));
+        System.out.println(queries.getIngredientsByRecipeName("cake"));
+        System.out.println(queries.getAllergensByRecipeName("cake"));
+        System.out.println(queries.getAllDrinksByRecipeName("cake"));
+        System.out.println(queries.getAllDrinks());
+        System.out.println(queries.getAllRecipesByType(Set.of("breakfast")));
         System.out.println();
-        queries.getIngredientsByRecipeName("cake");
+        System.out.println(queries.getAllRecipesByIngredients(Set.of("flour", "eggs")));
+        System.out.println();
+        System.out.println(queries.getAllRecipes());
+        System.out.println();
+        System.out.println(queries.getAllRecipesByAllergens(Set.of("gluten")));
     }
 }

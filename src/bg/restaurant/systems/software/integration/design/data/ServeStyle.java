@@ -12,11 +12,11 @@ public enum ServeStyle {
         this.serveStyle = serveStyle;
     }
 
-    public String getDrinkTypeString() {
+    public String getTypeString() {
         return serveStyle;
     }
 
-    public static ServeStyle getDrinkType(String serveStyle) {
+    public static ServeStyle getType(String serveStyle) {
         return Arrays.stream(values())
             .filter(c -> c.serveStyle.equalsIgnoreCase(serveStyle))
             .findFirst()
