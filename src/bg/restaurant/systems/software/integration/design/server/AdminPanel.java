@@ -1,5 +1,7 @@
 package bg.restaurant.systems.software.integration.design.server;
 
+import bg.restaurant.systems.software.integration.design.DatabaseConnection;
+import bg.restaurant.systems.software.integration.design.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 import bg.restaurant.systems.software.integration.design.storage.DefaultRestaurant;
@@ -12,7 +14,12 @@ public class AdminPanel {
 
         //ErrorLogs errorLogs = new ErrorLogs("src/bg/sofia/uni/fmi/mjt/bookmarks/repository/logs/logs.txt");
 
-        Restaurant restaurant = new DefaultRestaurant();
+        DatabaseConnection databaseConnection = new DatabaseConnection(
+                "jdbc:mysql://localhost:3306/restaurants", "root", "");
+
+        Queries queries = new Queries(databaseConnection);
+
+        Restaurant restaurant = new DefaultRestaurant(queries);
 
         Server server = new Server(serverPortNumber, new CommandExecutor(restaurant));
 
