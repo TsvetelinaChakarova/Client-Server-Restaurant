@@ -4,6 +4,8 @@ import bg.restaurant.systems.software.integration.design.command.handlers.Comman
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
+import java.sql.SQLException;
+
 public class GetAllRecipesCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 0;
 
@@ -14,13 +16,9 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
     }
 
     @Override
-    public String execute() {
-        try {
-            validateForExactlyNoArgs(NUMBER_OF_COMMAND_ARGS);
+    public String execute() throws SQLException {
+        validateForExactlyNoArgs(NUMBER_OF_COMMAND_ARGS);
 
-            return restaurant.getAllRecipes();
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+        return restaurant.getAllRecipes();
     }
 }

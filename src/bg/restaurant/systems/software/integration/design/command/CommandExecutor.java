@@ -37,7 +37,8 @@ public class CommandExecutor extends CommandExecutorValidator {
                 default -> "Unknown command";
             };
         } catch (Exception e) {
-            return e.getMessage();
+            // logs e.getMessage();
+            return "There was an error in the application, please try again!";
         }
     }
 }

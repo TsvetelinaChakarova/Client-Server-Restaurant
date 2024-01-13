@@ -1,11 +1,11 @@
 package bg.restaurant.systems.software.integration.design.command.handlers.allergen;
 
-import bg.restaurant.systems.software.integration.design.DatabaseConnection;
-import bg.restaurant.systems.software.integration.design.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+
+import java.sql.SQLException;
 
 public class GetAllergensByRecipeNameCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 2;
@@ -18,16 +18,15 @@ public class GetAllergensByRecipeNameCommand extends CommandsValidator implement
     }
 
     @Override
-    public String execute() {
-        try {
-            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
-            if (!areCommandTypeEqual(args[0], CommandType.RECIPE_NAME)) {
-                return "Unknown Command";
-            }
+    public String execute() throws SQLException {
+        validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
 
-            return restaurant.getAllergensByRecipeName(args[1]);
-        } catch (Exception e) {
-            return e.getMessage();
+        String commandExtension = args[0];
+        if (!areCommandTypeEqual(commandExtension, CommandType.RECIPE_NAME)) {
+            return "Unknown Command";
         }
+
+        String recipeName = args[1];
+        return restaurant.getAllergensByRecipeName(recipeName);
     }
 }

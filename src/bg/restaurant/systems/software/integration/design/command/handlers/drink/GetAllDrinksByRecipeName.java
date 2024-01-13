@@ -4,6 +4,8 @@ import bg.restaurant.systems.software.integration.design.command.handlers.Comman
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
+import java.sql.SQLException;
+
 public class GetAllDrinksByRecipeName extends CommandsValidator implements CommandHandler {
     private final Restaurant restaurant;
     private final String[] args;
@@ -14,13 +16,10 @@ public class GetAllDrinksByRecipeName extends CommandsValidator implements Comma
     }
 
     @Override
-    public String execute() {
-        try {
-            validateArgumentsLength(args);
+    public String execute() throws SQLException {
+        validateArgumentsLength(args);
 
-            return restaurant.getAllDrinksByRecipeName(args[0]);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+        String recipeName = args[0];
+        return restaurant.getAllDrinksByRecipeName(recipeName);
     }
 }

@@ -45,7 +45,6 @@ public class CommandCreator extends CommandsCreatorValidator {
         List<String> tokens = CommandCreator.getCommandArguments(clientInput);
         String[] args = tokens.subList(1, tokens.size()).toArray(new String[0]);
 
-        // Add validation
         if (validateGet(tokens.get(0)).equals(UNKNOWN_COMMAND)) {
             return new Command("unknown", new String[] {"command"});
         }

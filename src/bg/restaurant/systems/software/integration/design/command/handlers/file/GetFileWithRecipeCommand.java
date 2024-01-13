@@ -17,15 +17,14 @@ public class GetFileWithRecipeCommand extends CommandsValidator implements Comma
 
     @Override
     public String execute() {
-        try {
-            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
-            if (!areCommandTypeEqual(args[0], CommandType.RECIPE_NAME)) {
-                return "Unknown Command";
-            }
+        validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS, args);
 
-            return args[1] + " | File";
-        } catch (Exception e) {
-            return e.getMessage();
+        String commandExtension = args[0];
+        if (!areCommandTypeEqual(commandExtension, CommandType.RECIPE_NAME)) {
+            return "Unknown Command";
         }
+
+        String recipeName = args[1];
+        return recipeName + " | File";
     }
 }

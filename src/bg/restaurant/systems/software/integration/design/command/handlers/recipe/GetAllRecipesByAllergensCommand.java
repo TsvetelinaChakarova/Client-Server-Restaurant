@@ -4,7 +4,7 @@ import bg.restaurant.systems.software.integration.design.command.handlers.Comman
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
-import java.util.Collection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class GetAllRecipesByAllergensCommand extends CommandsValidator implements CommandHandler {
@@ -17,13 +17,9 @@ public class GetAllRecipesByAllergensCommand extends CommandsValidator implement
     }
 
     @Override
-    public String execute() {
-        try {
-            validateArgumentsLength(args);
+    public String execute() throws SQLException {
+        validateArgumentsLength(args);
 
-            return restaurant.getAllRecipesByAllergens(List.of(args));
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+        return restaurant.getAllRecipesByAllergens(List.of(args));
     }
 }
