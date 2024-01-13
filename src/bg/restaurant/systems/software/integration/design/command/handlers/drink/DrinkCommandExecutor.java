@@ -13,15 +13,14 @@ public class DrinkCommandExecutor extends CommandExecutorValidator {
         this.restaurant = restaurant;
     }
 
-    public String execute(String... arguments) {
+    public String execute(String[] arguments) {
         validateArgumentsLength(arguments);
         CommandType commandType = CommandType.getCommandType(arguments[0]);
 
         return switch (commandType) {
             case ALL -> new GetAllDrinksCommand(restaurant).execute();
-            case RECIPE_NAME ->
-                new GetAllDrinksByRecipeName(restaurant,
-                    Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
+            case RECIPE_NAME -> new GetAllDrinksByRecipeName(restaurant,
+                Arrays.copyOfRange(arguments, 1, arguments.length)).execute();
             default -> "Unknown command";
         };
     }

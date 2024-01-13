@@ -15,7 +15,7 @@ public class GetAllDrinksCommand extends CommandsValidator implements CommandHan
     @Override
     public String execute() {
         try {
-            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS);
+            validateForExactlyNoArgs(NUMBER_OF_COMMAND_ARGS);
 
             return "Drinks";
         } catch (Exception e) {

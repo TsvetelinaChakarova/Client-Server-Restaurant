@@ -13,7 +13,7 @@ public class RecipeCommandExecutor extends CommandExecutorValidator {
         this.restaurant = restaurant;
     }
 
-    public String execute(String... arguments) {
+    public String execute(String[] arguments) {
         validateArgumentsLength(arguments);
         CommandType commandType = CommandType.getCommandType(arguments[0]);
 
