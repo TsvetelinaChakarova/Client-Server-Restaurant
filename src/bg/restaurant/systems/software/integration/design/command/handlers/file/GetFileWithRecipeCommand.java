@@ -3,14 +3,14 @@ package bg.restaurant.systems.software.integration.design.command.handlers.file;
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 
 public class GetFileWithRecipeCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 2;
-    private final Restaurant restaurant;
+    private final RestaurantAPI restaurant;
     private final String[] args;
 
-    public GetFileWithRecipeCommand(Restaurant restaurant, String[] args) {
+    public GetFileWithRecipeCommand(RestaurantAPI restaurant, String[] args) {
         this.restaurant = restaurant;
         this.args = args;
     }

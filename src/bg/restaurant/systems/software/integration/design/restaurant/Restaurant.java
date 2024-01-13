@@ -1,31 +1,111 @@
 package bg.restaurant.systems.software.integration.design.restaurant;
 
+import bg.restaurant.systems.software.integration.design.storage.Queries;
+import bg.restaurant.systems.software.integration.design.data.recipe.Recipe;
+import com.google.gson.Gson;
+
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Iterator;
 
-public interface Restaurant {
+public class Restaurant extends RestaurantValidator implements RestaurantAPI {
+    private final Queries queries;
+    private final Gson gson;
+    private static final String NO_RESULT = "No result!";
 
-    String getAllergensByRecipeName(String recipeName) throws SQLException;
+    public Restaurant(Queries queries, Gson gson) {
+        this.queries = queries;
+        this.gson = gson;
+    }
 
-    String getRecipeByName(String recipeName) throws SQLException;
+    @Override
+    public String getRecipeByName(String recipeName) throws SQLException {
+        var result = queries.getRecipeByName(recipeName);
 
-    String getAllRecipes() throws SQLException;
+        if (result == null || result.isEmpty()) {
+            return NO_RESULT;
+        }
 
-    String getAllRecipesByAllergens(Collection<String> allergens) throws SQLException;
+        Iterator<Recipe> iterator = result.iterator();
 
-    String getAllRecipesByIngredients(Collection<String> ingredients) throws SQLException;
+        return gson.toJson(iterator.next());
+    }
 
-    String getAllRecipesByType(Collection<String> types) throws SQLException;
+    @Override
+    public String getAllRecipes() throws SQLException {
+        var result = queries.getAllRecipes();
 
-    String getServingWayByRecipeName(String recipeName) throws SQLException;
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
 
-    String getPreparationTimeForRecipeByName(String recipeName) throws SQLException;
+    @Override
+    public String getAllRecipesByAllergens(Collection<String> allergens) throws SQLException {
+        var result = queries.getAllRecipesByAllergens(allergens);
 
-    String getAllDrinks() throws SQLException;
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
 
-    String getAllDrinksByRecipeName(String recipeName) throws SQLException;
+    @Override
+    public String getAllRecipesByIngredients(Collection<String> ingredients) throws SQLException {
+        var result = queries.getAllRecipesByIngredients(ingredients);
 
-    String getIngredientsByRecipeName(String recipeName) throws SQLException;
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
 
-    String getFileWithRecipe(String recipeName, String filePath) throws SQLException;
+    @Override
+    public String getAllRecipesByType(Collection<String> types) throws SQLException {
+        var result = queries.getAllRecipesByType(types);
+
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
+
+    @Override
+    public String getServingWayByRecipeName(String recipeName) throws SQLException {
+        var result = queries.getServingWayByRecipeName(recipeName);
+
+        return result == null ? NO_RESULT : gson.toJson(result);
+    }
+
+    @Override
+    public String getPreparationTimeForRecipeByName(String recipeName) throws SQLException {
+        var result = queries.getPreparationTimeForRecipeByName(recipeName);
+
+        return result == 0 ? NO_RESULT : gson.toJson(result + " minutes");
+    }
+
+    @Override
+    public String getAllDrinks() throws SQLException {
+        var result = queries.getAllDrinks();
+
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
+
+    @Override
+    public String getAllDrinksByRecipeName(String recipeName) throws SQLException {
+        var result = queries.getAllDrinksByRecipeName(recipeName);
+
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
+
+    @Override
+    public String getAllergensByRecipeName(String recipeName) throws SQLException {
+        var result = queries.getAllergensByRecipeName(recipeName);
+
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
+
+    @Override
+    public String getIngredientsByRecipeName(String recipeName) throws SQLException {
+        var result = queries.getIngredientsByRecipeName(recipeName);
+
+        return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
+    }
+
+    @Override
+    public String getFileWithRecipe(String recipeName, String filePath) throws SQLException {
+        String result = getRecipeByName(recipeName);
+
+
+        return "a";
+    }
 }

@@ -10,15 +10,15 @@ import bg.restaurant.systems.software.integration.design.command.handlers.recipe
 import bg.restaurant.systems.software.integration.design.command.handlers.serving.GetServingWayByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
 import bg.restaurant.systems.software.integration.design.logger.ErrorLogger;
-import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 
 import java.io.IOException;
 
 public class CommandExecutor extends CommandExecutorValidator {
-    private final Restaurant restaurant;
+    private final RestaurantAPI restaurant;
     private final ErrorLogger errorLogger;
 
-    public CommandExecutor(Restaurant restaurant, ErrorLogger errorLogger) {
+    public CommandExecutor(RestaurantAPI restaurant, ErrorLogger errorLogger) {
         this.errorLogger = errorLogger;
         validateConstructorParameter(restaurant);
 

@@ -2,15 +2,15 @@ package bg.restaurant.systems.software.integration.design.command.handlers.drink
 
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
-import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 
 import java.sql.SQLException;
 import java.util.Arrays;
 
 public class DrinkCommandExecutor extends CommandExecutorValidator {
-    private final Restaurant restaurant;
+    private final RestaurantAPI restaurant;
 
-    public DrinkCommandExecutor(Restaurant restaurant) {
+    public DrinkCommandExecutor(RestaurantAPI restaurant) {
         this.restaurant = restaurant;
     }
 

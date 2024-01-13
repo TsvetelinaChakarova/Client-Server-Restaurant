@@ -2,15 +2,15 @@ package bg.restaurant.systems.software.integration.design.command.handlers.drink
 
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 
 import java.sql.SQLException;
 
 public class GetAllDrinksCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 0;
-    private final Restaurant restaurant;
+    private final RestaurantAPI restaurant;
 
-    public GetAllDrinksCommand(Restaurant restaurant) {
+    public GetAllDrinksCommand(RestaurantAPI restaurant) {
         this.restaurant = restaurant;
     }
 

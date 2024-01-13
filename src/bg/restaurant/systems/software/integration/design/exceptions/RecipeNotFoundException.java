@@ -1,4 +1,4 @@
-package bg.restaurant.systems.software.integration.design.restaurant.exceptions;
+package bg.restaurant.systems.software.integration.design.exceptions;
 
 public class RecipeNotFoundException extends Exception {
     public RecipeNotFoundException(String message) {

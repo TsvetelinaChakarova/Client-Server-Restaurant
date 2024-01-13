@@ -4,8 +4,8 @@ import bg.restaurant.systems.software.integration.design.storage.DatabaseConnect
 import bg.restaurant.systems.software.integration.design.storage.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
 import bg.restaurant.systems.software.integration.design.logger.ErrorLogger;
-import bg.restaurant.systems.software.integration.design.restaurant.DefaultRestaurant;
 import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -34,7 +34,7 @@ public class AdminPanel {
             .setPrettyPrinting()
             .create();
 
-        Restaurant restaurant = new DefaultRestaurant(queries, gson);
+        RestaurantAPI restaurant = new Restaurant(queries, gson);
 
         Server server = new Server(serverPortNumber, new CommandExecutor(restaurant, errorLogger));
 

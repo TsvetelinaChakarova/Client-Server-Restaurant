@@ -3,16 +3,16 @@ package bg.restaurant.systems.software.integration.design.command.handlers.aller
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 
 import java.sql.SQLException;
 
 public class GetAllergensByRecipeNameCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 2;
-    private final Restaurant restaurant;
+    private final RestaurantAPI restaurant;
     private final String[] args;
 
-    public GetAllergensByRecipeNameCommand(Restaurant restaurant, String[] args) {
+    public GetAllergensByRecipeNameCommand(RestaurantAPI restaurant, String[] args) {
         this.restaurant = restaurant;
         this.args = args;
     }

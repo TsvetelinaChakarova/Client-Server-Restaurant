@@ -1,4 +1,4 @@
-package bg.restaurant.systems.software.integration.design.restaurant.exceptions;
+package bg.restaurant.systems.software.integration.design.exceptions;
 
 public class RecipeAlreadyExistsException extends Exception {
     public RecipeAlreadyExistsException(String message) {
