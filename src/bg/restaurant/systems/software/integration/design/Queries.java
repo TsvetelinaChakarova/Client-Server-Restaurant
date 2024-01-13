@@ -59,8 +59,8 @@ public class Queries {
             int preparationTime = resultSet.getInt(PREPARATION_TIME);
 
             recipes.add(new Recipe(recipeName,
-                    type,
-                    serveStyle,
+                    type.getRecipeTypeString(),
+                    serveStyle.getTypeString(),
                     getIngredientsByRecipeName(recipeName),
                     preparationTime,
                     getAllergensByRecipeName(recipeName),

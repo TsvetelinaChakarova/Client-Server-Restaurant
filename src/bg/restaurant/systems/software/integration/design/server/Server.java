@@ -55,9 +55,13 @@ public class Server extends Thread {
                                 continue;
                             }
 
-                            String output =
-                                commandExecutor.execute(CommandCreator.newCommand(clientInput));
-                            writeClientOutput(clientChannel, output);
+                            try {
+                                String output =
+                                        commandExecutor.execute(CommandCreator.newCommand(clientInput));
+                                writeClientOutput(clientChannel, output);
+                            } catch (Exception e) {
+                                writeClientOutput(clientChannel, "Unknown command");
+                            }
 
                         } else if (key.isAcceptable()) {
                             accept(selector, key);

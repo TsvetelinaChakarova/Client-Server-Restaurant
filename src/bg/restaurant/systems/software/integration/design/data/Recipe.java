@@ -2,7 +2,7 @@ package bg.restaurant.systems.software.integration.design.data;
 
 import java.util.Set;
 
-public record Recipe(String name, RecipeType type, ServeStyle serveStyle,
+public record Recipe(String name, String type, String serveStyle,
                      Set<Ingredient> ingredients, int preparationTime,
                      Set<Allergen> allergens, Set<Drink> suitableDrinks) {
 

@@ -55,7 +55,7 @@ public class DefaultRestaurant extends RestaurantValidator implements Restaurant
     public String getPreparationTimeForRecipeByName(String recipeName) throws SQLException {
         var result = queries.getPreparationTimeForRecipeByName(recipeName);
 
-        return result == 0 ? NO_RESULT : gson.toJson(result);
+        return result == 0 ? NO_RESULT : gson.toJson(result + " minutes");
     }
 
     @Override
