@@ -1,6 +1,6 @@
 package bg.restaurant.systems.software.integration.design.command;
 
-public record Command(String command, String... arguments) {
+public record Command(String command, String[] arguments) {
     public Command {
         if (command == null || command.isEmpty() || command.isBlank()) {
             throw new IllegalArgumentException("The command cannot be null, empty or blank!");

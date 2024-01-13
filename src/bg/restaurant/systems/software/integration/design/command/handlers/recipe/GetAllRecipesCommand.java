@@ -16,7 +16,7 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
     @Override
     public String execute() {
         try {
-            validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS);
+            validateForExactlyNoArgs(NUMBER_OF_COMMAND_ARGS);
 
             return restaurant.getAllRecipes().toString();
         } catch (Exception e) {

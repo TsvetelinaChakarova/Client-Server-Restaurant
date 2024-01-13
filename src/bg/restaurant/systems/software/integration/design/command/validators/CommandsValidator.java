@@ -5,13 +5,19 @@ import bg.restaurant.systems.software.integration.design.command.CommandType;
 public class CommandsValidator {
     private static final int MUST_HAVE_ONE_ARG = 1;
 
-    protected void validateArgumentsLength(String... args) {
+    protected void validateForExactlyNoArgs(int numberOfArgs) {
+        if (numberOfArgs != 0) {
+            throw new IllegalArgumentException("This command must have 0 arguments!");
+        }
+    }
+
+    protected void validateArgumentsLength(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("The number of arguments must be at least one!");
         }
     }
 
-    protected void validateThatContainsOneArgument(String... args) {
+    protected void validateThatContainsOneArgument(String[] args) {
         if ((args.length - 1) != MUST_HAVE_ONE_ARG) {
             throw new IllegalArgumentException("This command has only one parameter!");
         }
@@ -27,7 +33,7 @@ public class CommandsValidator {
         return CommandType.getCommandType(currentType).equals(neededType);
     }
 
-    protected void validateForSufficientNumberOfArguments(int argsNumber, String... args) {
+    protected void validateForSufficientNumberOfArguments(int argsNumber, String[] args) {
         if (args.length != argsNumber) {
             throw new IllegalArgumentException("The number of arguments for this command must be " + argsNumber);
         }

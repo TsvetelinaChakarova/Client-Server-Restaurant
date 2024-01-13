@@ -26,13 +26,14 @@ public class AdminPanel {
         Scanner adminInput = new Scanner(System.in);
         String adminCommand;
 
+        System.out.println("Hello admin, to start the server please enter (start) or to stop (stop) commands.");
         System.out.print("Please input command: ");
         while (true) {
             adminCommand = adminInput.nextLine();
             adminCommand = adminCommand.trim();
 
             if (adminCommand.equals("start")) {
-                System.out.println("Starting server");
+                System.out.println("Starting server...");
                 System.out.println("Listening for client requests");
                 server.start();
             }
