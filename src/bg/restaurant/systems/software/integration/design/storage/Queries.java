@@ -230,6 +230,7 @@ public class Queries {
         return ingredients;
     }
 
+    // For testing purposes
     public static void main(String[] args) throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection(
                 "jdbc:mysql://localhost:3306/restaurants", "root", "");

@@ -38,27 +38,4 @@ public class DatabaseConnection {
             System.out.println(exception.getMessage());
         }
     }
-
-    public static void main(String[] arg) {
-        DatabaseConnection databaseConnection = new DatabaseConnection(
-                "jdbc:mysql://localhost:3306/restaurants", "root", "");
-
-        try {
-            ResultSet resultSet = databaseConnection.executeQuery("select * from recipes");
-
-            int id;
-            String name;
-            String type;
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                name = resultSet.getString("name");
-                type = resultSet.getString("type");
-                System.out.println("Id : " + id
-                        + " Name : " + name + " " + type);
-            }
-        } catch (
-                Exception exception) {
-            System.out.println(exception.getMessage());
-        }
-    }
 }

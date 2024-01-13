@@ -100,12 +100,4 @@ public class Restaurant extends RestaurantValidator implements RestaurantAPI {
 
         return result == null || result.isEmpty() ? NO_RESULT : gson.toJson(result);
     }
-
-    @Override
-    public String getFileWithRecipe(String recipeName, String filePath) throws SQLException {
-        String result = getRecipeByName(recipeName);
-
-
-        return "a";
-    }
 }

@@ -2,7 +2,6 @@ package bg.restaurant.systems.software.integration.design.command;
 
 import bg.restaurant.systems.software.integration.design.command.handlers.allergen.GetAllergensByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.command.handlers.drink.DrinkCommandExecutor;
-import bg.restaurant.systems.software.integration.design.command.handlers.file.GetFileWithRecipeCommand;
 import bg.restaurant.systems.software.integration.design.command.handlers.ingredient.GetIngredientsByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.command.handlers.preparation.GetPreparationTimeForRecipeByNameCommand;
 import bg.restaurant.systems.software.integration.design.command.handlers.recipe.GetRecipeByNameCommand;
@@ -35,7 +34,6 @@ public class CommandExecutor extends CommandExecutorValidator {
                 case RECIPES -> new RecipeCommandExecutor(restaurant).execute(cmd.arguments());
                 case RECIPE -> new GetRecipeByNameCommand(restaurant, cmd.arguments()).execute();
                 case DRINKS -> new DrinkCommandExecutor(restaurant).execute(cmd.arguments());
-                case FILE -> new GetFileWithRecipeCommand(restaurant, cmd.arguments()).execute();
                 case INGREDIENTS -> new GetIngredientsByRecipeNameCommand(restaurant, cmd.arguments()).execute();
                 case ALLERGENS -> new GetAllergensByRecipeNameCommand(restaurant, cmd.arguments()).execute();
                 case PREPARATION_TIME ->
