@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class ErrorLogger extends ErrorLoggerValidator {
+    private static final String TIMESTAMP_LINE = "Timestamp: ";
     private static final String CAUSE_LINE = "Caused by: ";
-    private static final String MESSAGE_LINE = ", exception message: ";
-    private static final String TRACE_LINE = ", with stack trace: ";
+    private static final String MESSAGE_LINE = "Exception message: ";
+    private static final String TRACE_LINE = "Stack trace: ";
     private final Path errorLogsPath;
 
     public ErrorLogger(String path) {
@@ -28,12 +30,14 @@ public class ErrorLogger extends ErrorLoggerValidator {
     }
 
     private String getErrorLog(Exception e) {
-        return CAUSE_LINE +
-            e.getClass() +
+        return TIMESTAMP_LINE +
+            LocalDateTime.now() + "\n" +
+            CAUSE_LINE +
+            e.getClass() + "\n" +
             MESSAGE_LINE +
-            e.getMessage() +
+            e.getMessage() + "\n" +
             TRACE_LINE +
-            Arrays.toString(e.getStackTrace());
+            Arrays.toString(e.getStackTrace()) + "\n\n";
     }
 
     private boolean isFileEmpty() throws IOException {

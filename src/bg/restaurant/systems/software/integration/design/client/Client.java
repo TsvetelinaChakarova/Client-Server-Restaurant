@@ -12,11 +12,13 @@ import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 public class Client {
-
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_HOST = "localhost";
     private static final int BUFFER_SIZE = 16384;
     private static final ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
+    private static final int FILE_COMMAND_ARGUMENTS_COUNT = 6;
+    private static final int PATH_ARGUMENT_INDEX = 4;
+    private static final int INPUT_PATH_INDEX = 5;
 
     private static void printRestaurantInfo() {
         System.out.println("""
@@ -54,8 +56,10 @@ public class Client {
 
     private static void createFile(String reply, String[] messageParts) throws IOException {
         if (messageParts != null) {
-            if (messageParts[4].equals("--path")) {
-                String pathFromInput = messageParts[5].replaceAll("\"", "");
+            if (messageParts.length == FILE_COMMAND_ARGUMENTS_COUNT &&
+                messageParts[PATH_ARGUMENT_INDEX].equals("--path")) {
+
+                String pathFromInput = messageParts[INPUT_PATH_INDEX].replaceAll("\"", "");
                 Path filePath = Path.of(pathFromInput);
                 File file = new File(pathFromInput);
 
@@ -71,6 +75,11 @@ public class Client {
                 }
                 Files.writeString(filePath, reply, StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
+            } else {
+                System.out.println("""
+                    Cannot create file because command is incorrect!
+                    The command looks like this: get file --recipe_name "..." --path "..."
+                    """);
             }
         }
     }
@@ -116,7 +125,7 @@ public class Client {
 
                 //String reply = new String(buffer.array(), 0, buffer.position(), "UTF-8"); // buffer drain
 
-                System.out.println("The following items are available:\n" + reply + "\n");
+                System.out.println("The restaurant's response is:\n" + reply + "\n");
                 createFile(reply, messageParts);
             }
 
