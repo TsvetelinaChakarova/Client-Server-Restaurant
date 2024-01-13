@@ -1,5 +1,7 @@
 package bg.restaurant.systems.software.integration.design.command.handlers.allergen;
 
+import bg.restaurant.systems.software.integration.design.DatabaseConnection;
+import bg.restaurant.systems.software.integration.design.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
@@ -23,7 +25,7 @@ public class GetAllergensByRecipeNameCommand extends CommandsValidator implement
                 return "Unknown Command";
             }
 
-            return args[1] + " | Allergens";
+            return restaurant.getAllergensByRecipeName(args[1]);
         } catch (Exception e) {
             return e.getMessage();
         }
