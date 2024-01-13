@@ -1,10 +1,12 @@
 package bg.restaurant.systems.software.integration.design.storage;
 
 import bg.restaurant.systems.software.integration.design.Queries;
+import bg.restaurant.systems.software.integration.design.data.Recipe;
 import com.google.gson.Gson;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class DefaultRestaurant extends RestaurantValidator implements Restaurant {
     private final Queries queries;
@@ -14,6 +16,19 @@ public class DefaultRestaurant extends RestaurantValidator implements Restaurant
     public DefaultRestaurant(Queries queries, Gson gson) {
         this.queries = queries;
         this.gson = gson;
+    }
+
+    @Override
+    public String getRecipeByName(String recipeName) throws SQLException {
+        var result = queries.getRecipeByName(recipeName);
+
+        if (result == null || result.isEmpty()) {
+            return NO_RESULT;
+        }
+
+        Iterator<Recipe> iterator = result.iterator();
+        
+        return gson.toJson(iterator.next());
     }
 
     @Override

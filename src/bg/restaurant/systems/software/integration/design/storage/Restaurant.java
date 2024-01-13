@@ -7,6 +7,8 @@ public interface Restaurant {
 
     String getAllergensByRecipeName(String recipeName) throws SQLException;
 
+    String getRecipeByName(String recipeName) throws SQLException;
+
     String getAllRecipes() throws SQLException;
 
     String getAllRecipesByAllergens(Collection<String> allergens) throws SQLException;

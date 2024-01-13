@@ -71,6 +71,15 @@ public class Queries {
         return recipes;
     }
 
+    public Set<Recipe> getRecipeByName(String recipeName) throws SQLException {
+        ResultSet resultSet = databaseConnection.executeQuery("""
+                SELECT * FROM recipes
+                WHERE name = \"""" +
+                recipeName + "\"");
+
+        return getRecipesForQueries(resultSet);
+    }
+
     public Set<Recipe> getAllRecipes() throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery(
                 "SELECT * FROM recipes");
