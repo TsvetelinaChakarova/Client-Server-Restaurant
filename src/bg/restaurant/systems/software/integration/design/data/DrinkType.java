@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum DrinkType {
     ALCOHOL("alcohol"),
     COFFEE("coffee"),
-    ALCOHOLFREE("non-alcoholic"),
+    ALCOHOL_FREE("non-alcoholic"),
     UNKNOWN("unknown");
 
     private final String drinkType;

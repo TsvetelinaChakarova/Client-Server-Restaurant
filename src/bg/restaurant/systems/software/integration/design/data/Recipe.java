@@ -15,11 +15,11 @@ public record Recipe(String name, RecipeType type, ServeStyle serveStyle,
             throw new IllegalArgumentException("The type cannot be null!");
         }
 
-        if (serveStyle == null ) {
+        if (serveStyle == null) {
             throw new IllegalArgumentException("The serveStyle cannot be null!");
         }
 
-        if (ingredients == null || ingredients.isEmpty() ) {
+        if (ingredients == null || ingredients.isEmpty()) {
             throw new IllegalArgumentException("The ingredients cannot be null or empty!");
         }
 

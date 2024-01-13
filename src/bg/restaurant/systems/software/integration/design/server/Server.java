@@ -15,23 +15,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 public class Server extends Thread {
-    private static final int BUFFER_SIZE = 8192;
+    private static final int BUFFER_SIZE = 16384;
     private static final String HOST = "localhost";
     private final CommandExecutor commandExecutor;
-    //    private final UserDatabase userDatabase;
-    //    private final BookmarkDatabase bookmarkDatabase;
     private final int port;
     private boolean isServerWorking;
     private ByteBuffer buffer;
     private Selector selector;
     private SelectionKey externalKey;
 
-    public Server(int port,
-                  CommandExecutor commandExecutor) { //UserDatabase userDatabase, BookmarkDatabase bookmarkDatabase
+    public Server(int port, CommandExecutor commandExecutor) {
         this.port = port;
         this.commandExecutor = commandExecutor;
-//        this.userDatabase = userDatabase;
-//        this.bookmarkDatabase = bookmarkDatabase;
     }
 
     @Override

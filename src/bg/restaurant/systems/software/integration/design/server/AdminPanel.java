@@ -3,8 +3,8 @@ package bg.restaurant.systems.software.integration.design.server;
 import bg.restaurant.systems.software.integration.design.DatabaseConnection;
 import bg.restaurant.systems.software.integration.design.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
-import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 import bg.restaurant.systems.software.integration.design.storage.DefaultRestaurant;
+import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,13 +17,13 @@ public class AdminPanel {
         //ErrorLogs errorLogs = new ErrorLogs("src/bg/sofia/uni/fmi/mjt/bookmarks/repository/logs/logs.txt");
 
         DatabaseConnection databaseConnection = new DatabaseConnection(
-                "jdbc:mysql://localhost:3306/restaurants", "root", "");
+            "jdbc:mysql://localhost:3306/restaurants", "root", "");
 
         Queries queries = new Queries(databaseConnection);
 
         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+            .setPrettyPrinting()
+            .create();
 
         Restaurant restaurant = new DefaultRestaurant(queries, gson);
 

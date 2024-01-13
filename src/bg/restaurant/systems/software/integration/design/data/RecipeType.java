@@ -1,6 +1,7 @@
 package bg.restaurant.systems.software.integration.design.data;
 
 import java.util.Arrays;
+
 public enum RecipeType {
     SOUP("soup"),
     MAIN_COURSE("main-course"),

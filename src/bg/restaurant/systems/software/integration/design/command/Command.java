@@ -16,4 +16,8 @@ public record Command(String command, String[] arguments) {
             }
         }
     }
+
+    public static Command of(String command, String[] arguments) {
+        return new Command(command, arguments);
+    }
 }
