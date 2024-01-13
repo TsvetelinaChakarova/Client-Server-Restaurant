@@ -5,6 +5,8 @@ import bg.restaurant.systems.software.integration.design.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 import bg.restaurant.systems.software.integration.design.storage.DefaultRestaurant;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.Scanner;
 
@@ -19,14 +21,18 @@ public class AdminPanel {
 
         Queries queries = new Queries(databaseConnection);
 
-        Restaurant restaurant = new DefaultRestaurant(queries);
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        Restaurant restaurant = new DefaultRestaurant(queries, gson);
 
         Server server = new Server(serverPortNumber, new CommandExecutor(restaurant));
 
         Scanner adminInput = new Scanner(System.in);
         String adminCommand;
 
-        System.out.println("Hello admin, to start the server please enter (start) or to stop (stop) commands.");
+        System.out.println("\nHello admin, to start the server please enter (start) or to stop (stop) commands.");
         System.out.print("Please input command: ");
         while (true) {
             adminCommand = adminInput.nextLine();
