@@ -4,6 +4,8 @@ import bg.restaurant.systems.software.integration.design.command.handlers.Comman
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 
+import java.util.List;
+
 public class GetAllRecipesByTypeCommand extends CommandsValidator implements CommandHandler {
     private final Restaurant restaurant;
     private final String[] args;
@@ -18,7 +20,7 @@ public class GetAllRecipesByTypeCommand extends CommandsValidator implements Com
         try {
             validateArgumentsLength(args);
 
-            return args[0];
+            return restaurant.getAllRecipesByType(List.of(args)).toString();
         } catch (Exception e) {
             return e.getMessage();
         }

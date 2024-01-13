@@ -18,7 +18,7 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
         try {
             validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS);
 
-            return "Recipes";
+            return restaurant.getAllRecipes().toString();
         } catch (Exception e) {
             return e.getMessage();
         }

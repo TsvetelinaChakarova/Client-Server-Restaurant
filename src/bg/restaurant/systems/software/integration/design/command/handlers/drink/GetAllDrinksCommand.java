@@ -17,7 +17,7 @@ public class GetAllDrinksCommand extends CommandsValidator implements CommandHan
         try {
             validateForSufficientNumberOfArguments(NUMBER_OF_COMMAND_ARGS);
 
-            return "Drinks";
+            return restaurant.getAllDrinks().toString();
         } catch (Exception e) {
             return e.getMessage();
         }
