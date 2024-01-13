@@ -5,6 +5,7 @@ import java.util.Arrays;
 public enum CommandType {
     GET("get"),
     RECIPES("recipes"),
+    RECIPE("recipe"),
     DRINKS("drinks"),
     INGREDIENTS("ingredients"),
     ALLERGENS("allergens"),
