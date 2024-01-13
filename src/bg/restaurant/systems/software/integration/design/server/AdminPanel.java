@@ -45,7 +45,7 @@ public class AdminPanel {
         System.out.print("Please input command: ");
         while (true) {
             adminCommand = adminInput.nextLine();
-            adminCommand = adminCommand.trim();
+            adminCommand = adminCommand.strip();
 
             if (adminCommand.equals("start")) {
                 System.out.println("Starting server...");
