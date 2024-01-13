@@ -2,7 +2,7 @@ package bg.restaurant.systems.software.integration.design.command.validators;
 
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 
-public class CommandsValidator {
+public abstract class CommandsValidator {
     private static final int MUST_HAVE_ONE_ARG = 1;
 
     protected void validateForExactlyNoArgs(int numberOfArgs) {

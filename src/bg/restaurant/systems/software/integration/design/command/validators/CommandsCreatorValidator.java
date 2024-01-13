@@ -1,6 +1,6 @@
 package bg.restaurant.systems.software.integration.design.command.validators;
 
-public class CommandsCreatorValidator {
+public abstract class CommandsCreatorValidator {
     private static final String UNKNOWN_COMMAND = "Unknown";
     private static final String GET_COMMAND = "get";
 

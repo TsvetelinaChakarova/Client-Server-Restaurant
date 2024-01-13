@@ -9,12 +9,17 @@ import bg.restaurant.systems.software.integration.design.command.handlers.recipe
 import bg.restaurant.systems.software.integration.design.command.handlers.recipe.RecipeCommandExecutor;
 import bg.restaurant.systems.software.integration.design.command.handlers.serving.GetServingWayByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
+import bg.restaurant.systems.software.integration.design.logger.ErrorLogger;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+
+import java.io.IOException;
 
 public class CommandExecutor extends CommandExecutorValidator {
     private final Restaurant restaurant;
+    private final ErrorLogger errorLogger;
 
-    public CommandExecutor(Restaurant restaurant) {
+    public CommandExecutor(Restaurant restaurant, ErrorLogger errorLogger) {
+        this.errorLogger = errorLogger;
         validateConstructorParameter(restaurant);
 
         this.restaurant = restaurant;
@@ -39,6 +44,11 @@ public class CommandExecutor extends CommandExecutorValidator {
                 default -> "Unknown command";
             };
         } catch (Exception e) {
+            try {
+                errorLogger.appendLogs(e);
+            } catch (IOException ex) {
+                return "There was an error in the application, please try again!";
+            }
             // logs e.getMessage();
             return "There was an error in the application, please try again!";
         }

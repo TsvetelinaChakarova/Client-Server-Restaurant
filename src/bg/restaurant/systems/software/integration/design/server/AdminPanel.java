@@ -3,18 +3,27 @@ package bg.restaurant.systems.software.integration.design.server;
 import bg.restaurant.systems.software.integration.design.DatabaseConnection;
 import bg.restaurant.systems.software.integration.design.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
+import bg.restaurant.systems.software.integration.design.logger.ErrorLogger;
 import bg.restaurant.systems.software.integration.design.storage.DefaultRestaurant;
 import bg.restaurant.systems.software.integration.design.storage.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AdminPanel {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         final int serverPortNumber = 7777;
 
-        //ErrorLogs errorLogs = new ErrorLogs("src/bg/sofia/uni/fmi/mjt/bookmarks/repository/logs/logs.txt");
+        File file = new File("src/bg/restaurant/systems/software/integration/design/logger/logs.txt");
+        if (file.createNewFile()) {
+            System.out.println("File created: " + file.getName());
+        }
+
+        ErrorLogger errorLogger =
+            new ErrorLogger("src/bg/restaurant/systems/software/integration/design/logger/logs.txt");
 
         DatabaseConnection databaseConnection = new DatabaseConnection(
             "jdbc:mysql://localhost:3306/restaurants", "root", "");
@@ -27,7 +36,7 @@ public class AdminPanel {
 
         Restaurant restaurant = new DefaultRestaurant(queries, gson);
 
-        Server server = new Server(serverPortNumber, new CommandExecutor(restaurant));
+        Server server = new Server(serverPortNumber, new CommandExecutor(restaurant, errorLogger));
 
         Scanner adminInput = new Scanner(System.in);
         String adminCommand;

@@ -26,4 +26,6 @@ public interface Restaurant {
     String getAllDrinksByRecipeName(String recipeName) throws SQLException;
 
     String getIngredientsByRecipeName(String recipeName) throws SQLException;
+
+    String getFileWithRecipe(String recipeName, String filePath) throws SQLException;
 }
