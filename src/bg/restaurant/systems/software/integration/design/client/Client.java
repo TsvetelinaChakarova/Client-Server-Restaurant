@@ -57,16 +57,17 @@ public class Client {
     private static void createFile(String reply, String[] messageParts) throws IOException {
         if (messageParts != null) {
             if (messageParts.length == FILE_COMMAND_ARGUMENTS_COUNT &&
-                messageParts[PATH_ARGUMENT_INDEX].equals("--path")) {
+                messageParts[PATH_ARGUMENT_INDEX].equals("--path") &&
+                !messageParts[INPUT_PATH_INDEX].isEmpty()) {
 
                 String pathFromInput = messageParts[INPUT_PATH_INDEX].replaceAll("\"", "");
                 Path filePath = Path.of(pathFromInput);
                 File file = new File(pathFromInput);
 
                 if (file.createNewFile()) {
-                    System.out.println("The file created at " + pathFromInput + ".");
+                    System.out.println("The file created at " + pathFromInput + "!");
                 } else {
-                    System.out.println("The file already exists.");
+                    System.out.println("The file was overwritten!");
                 }
 
                 if (Files.size(filePath) != 0) {
@@ -125,7 +126,9 @@ public class Client {
 
                 //String reply = new String(buffer.array(), 0, buffer.position(), "UTF-8"); // buffer drain
 
-                System.out.println("The restaurant's response is:\n" + reply + "\n");
+                if (messageParts == null) {
+                    System.out.println("The restaurant's response is:\n" + reply + "\n");
+                }
                 createFile(reply, messageParts);
             }
 
