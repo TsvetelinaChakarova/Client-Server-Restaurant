@@ -27,7 +27,7 @@ public class DefaultRestaurant extends RestaurantValidator implements Restaurant
         }
 
         Iterator<Recipe> iterator = result.iterator();
-        
+
         return gson.toJson(iterator.next());
     }
 
