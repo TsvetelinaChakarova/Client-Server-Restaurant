@@ -19,8 +19,9 @@ public class Client {
         System.out.println("------------------------------------------MENU------------------------------------------");
         System.out.println("Recipes");
         System.out.println("Get all recipes -> get recipes --all");
+        System.out.println("Get recipe by name -> get recipe --recipe_name \"...\"");
         System.out.println("Get all recipes by recipe type -> get recipes --type [\"breakfast\", \"lunch\", ...]");
-        System.out.println("Get all recipes with certain ingredient -> get recipes --ingredients [\"salt\",\"pepper\", ...]");
+        System.out.println("Get all recipes with certain ingredient -> get recipes --ingredients [\"salt\", \"pepper\", ...]");
         System.out.println("Get all recipes with certain allergen -> get recipes --allergens [\"milk\", \"gluten\", ...]\n");
         System.out.println("Drinks");
         System.out.println("Get all drinks -> get drinks --all");
@@ -75,7 +76,7 @@ public class Client {
 
                 //String reply = new String(buffer.array(), 0, buffer.position(), "UTF-8"); // buffer drain
 
-                System.out.println("The server replied {" + reply + "}\n");
+                System.out.println("The following items are available:\n" + reply + "\n");
             }
 
         } catch (IOException e) {

@@ -27,7 +27,6 @@ public class GetRecipeByNameCommand extends CommandsValidator implements Command
         }
 
         String recipeName = args[1];
-        return recipeName;
-        //return restaurant.getPreparationTimeForRecipeByName(recipeName);
+        return restaurant.getRecipeByName(recipeName);
     }
 }
