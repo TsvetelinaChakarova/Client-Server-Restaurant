@@ -18,7 +18,7 @@ public class GetAllDrinksByRecipeName extends CommandsValidator implements Comma
         try {
             validateArgumentsLength(args);
 
-            return args[0];
+            return restaurant.getAllDrinksByRecipeName(args[0]);
         } catch (Exception e) {
             return e.getMessage();
         }

@@ -23,7 +23,7 @@ public class GetIngredientsByRecipeNameCommand extends CommandsValidator impleme
                 return "Unknown Command";
             }
 
-            return args[1] + " | Ingredients";
+            return restaurant.getIngredientsByRecipeName(args[1]);
         } catch (Exception e) {
             return e.getMessage();
         }

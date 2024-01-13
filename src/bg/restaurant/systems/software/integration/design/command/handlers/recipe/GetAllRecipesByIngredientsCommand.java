@@ -20,7 +20,7 @@ public class GetAllRecipesByIngredientsCommand extends CommandsValidator impleme
         try {
             validateArgumentsLength(args);
 
-            return restaurant.getAllRecipesByIngredients(List.of(args)).toString();
+            return restaurant.getAllRecipesByIngredients(List.of(args));
         } catch (Exception e) {
             return e.getMessage();
         }

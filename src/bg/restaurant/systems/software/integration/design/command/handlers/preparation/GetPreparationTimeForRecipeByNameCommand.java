@@ -23,7 +23,7 @@ public class GetPreparationTimeForRecipeByNameCommand extends CommandsValidator 
                 return "Unknown Command";
             }
 
-            return String.valueOf(restaurant.getPreparationTimeForRecipeByName(args[1]));
+            return restaurant.getPreparationTimeForRecipeByName(args[1]);
         } catch (Exception e) {
             return e.getMessage();
         }

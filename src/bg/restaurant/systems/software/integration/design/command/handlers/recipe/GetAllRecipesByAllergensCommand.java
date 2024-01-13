@@ -21,7 +21,7 @@ public class GetAllRecipesByAllergensCommand extends CommandsValidator implement
         try {
             validateArgumentsLength(args);
 
-            return restaurant.getAllRecipesByAllergens(List.of(args)).toString();
+            return restaurant.getAllRecipesByAllergens(List.of(args));
         } catch (Exception e) {
             return e.getMessage();
         }

@@ -18,7 +18,7 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
         try {
             validateForExactlyNoArgs(NUMBER_OF_COMMAND_ARGS);
 
-            return restaurant.getAllRecipes().toString();
+            return restaurant.getAllRecipes();
         } catch (Exception e) {
             return e.getMessage();
         }

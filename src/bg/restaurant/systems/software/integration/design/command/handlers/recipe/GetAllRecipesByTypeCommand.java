@@ -20,7 +20,7 @@ public class GetAllRecipesByTypeCommand extends CommandsValidator implements Com
         try {
             validateArgumentsLength(args);
 
-            return restaurant.getAllRecipesByType(List.of(args)).toString();
+            return restaurant.getAllRecipesByType(List.of(args));
         } catch (Exception e) {
             return e.getMessage();
         }

@@ -23,7 +23,7 @@ public class GetServingWayByRecipeNameCommand extends CommandsValidator implemen
                 return "Unknown Command";
             }
 
-            return restaurant.getServingWayByRecipeName(args[1]).toString();
+            return restaurant.getServingWayByRecipeName(args[1]);
         } catch (Exception e) {
             return e.getMessage();
         }
