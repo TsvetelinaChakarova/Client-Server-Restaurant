@@ -27,7 +27,7 @@ public class Client {
         System.out.println("Get all drinks -> get drinks --all");
         System.out.println("Get suitable drinks for recipe -> get drinks --recipe_name \"...\"\n");
         System.out.println("Files");
-        System.out.println("Get file with certain recipe -> get file --recipe_name \"...\"\n");
+        System.out.println("Get file with certain recipe -> get file --recipe_name \"...\" --path \"...\"\n");
         System.out.println("Allergens");
         System.out.println("Get allergens for certain recipe -> get allergens --recipe_name \"...\"\n");
         System.out.println("Ingredients");
@@ -59,6 +59,11 @@ public class Client {
                     break;
                 }
 
+                if (message.contains("get file --recipe_name")) {
+                    String fileMessage =  new String(message);
+                    String[] messageParts = fileMessage.split(" ");
+                    message = "get recipe --recipe_name " + messageParts[3];
+                }
                 //System.out.println("Sending message {" + message + "} to the server...");
 
                 buffer.clear();
