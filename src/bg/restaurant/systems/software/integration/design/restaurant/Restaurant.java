@@ -1,4 +1,4 @@
-package bg.restaurant.systems.software.integration.design.storage;
+package bg.restaurant.systems.software.integration.design.restaurant;
 
 import java.sql.SQLException;
 import java.util.Collection;

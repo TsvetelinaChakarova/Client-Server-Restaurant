@@ -1,4 +1,8 @@
-package bg.restaurant.systems.software.integration.design.data;
+package bg.restaurant.systems.software.integration.design.data.recipe;
+
+import bg.restaurant.systems.software.integration.design.data.allergen.Allergen;
+import bg.restaurant.systems.software.integration.design.data.ingredient.Ingredient;
+import bg.restaurant.systems.software.integration.design.data.drink.Drink;
 
 import java.util.Set;
 

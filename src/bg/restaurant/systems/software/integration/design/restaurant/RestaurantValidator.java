@@ -1,7 +1,7 @@
-package bg.restaurant.systems.software.integration.design.storage;
+package bg.restaurant.systems.software.integration.design.restaurant;
 
-import bg.restaurant.systems.software.integration.design.data.Recipe;
-import bg.restaurant.systems.software.integration.design.storage.exceptions.RecipeAlreadyExistsException;
+import bg.restaurant.systems.software.integration.design.data.recipe.Recipe;
+import bg.restaurant.systems.software.integration.design.restaurant.exceptions.RecipeAlreadyExistsException;
 
 import java.util.Set;
 

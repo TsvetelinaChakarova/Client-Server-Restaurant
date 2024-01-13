@@ -1,4 +1,4 @@
-package bg.restaurant.systems.software.integration.design.data;
+package bg.restaurant.systems.software.integration.design.data.drink;
 
 import java.util.Arrays;
 

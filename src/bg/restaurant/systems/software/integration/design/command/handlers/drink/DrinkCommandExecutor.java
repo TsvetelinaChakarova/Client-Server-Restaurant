@@ -2,7 +2,7 @@ package bg.restaurant.systems.software.integration.design.command.handlers.drink
 
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
-import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
 
 import java.sql.SQLException;
 import java.util.Arrays;

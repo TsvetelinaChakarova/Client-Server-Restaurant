@@ -1,7 +1,7 @@
 package bg.restaurant.systems.software.integration.design.command.validators;
 
 import bg.restaurant.systems.software.integration.design.command.Command;
-import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
 
 public abstract class CommandExecutorValidator {
     protected void validateArgumentsLength(String[] args) {

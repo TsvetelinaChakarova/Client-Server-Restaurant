@@ -10,7 +10,7 @@ import bg.restaurant.systems.software.integration.design.command.handlers.recipe
 import bg.restaurant.systems.software.integration.design.command.handlers.serving.GetServingWayByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandExecutorValidator;
 import bg.restaurant.systems.software.integration.design.logger.ErrorLogger;
-import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
 
 import java.io.IOException;
 

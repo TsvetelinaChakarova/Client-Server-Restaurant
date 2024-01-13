@@ -3,7 +3,7 @@ package bg.restaurant.systems.software.integration.design.command.handlers.file;
 import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
 
 public class GetFileWithRecipeCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 2;

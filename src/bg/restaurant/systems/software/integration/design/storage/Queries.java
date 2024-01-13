@@ -1,11 +1,11 @@
-package bg.restaurant.systems.software.integration.design;
+package bg.restaurant.systems.software.integration.design.storage;
 
-import bg.restaurant.systems.software.integration.design.data.Allergen;
-import bg.restaurant.systems.software.integration.design.data.Drink;
-import bg.restaurant.systems.software.integration.design.data.Ingredient;
-import bg.restaurant.systems.software.integration.design.data.Recipe;
-import bg.restaurant.systems.software.integration.design.data.RecipeType;
-import bg.restaurant.systems.software.integration.design.data.ServeStyle;
+import bg.restaurant.systems.software.integration.design.data.allergen.Allergen;
+import bg.restaurant.systems.software.integration.design.data.drink.Drink;
+import bg.restaurant.systems.software.integration.design.data.ingredient.Ingredient;
+import bg.restaurant.systems.software.integration.design.data.recipe.Recipe;
+import bg.restaurant.systems.software.integration.design.data.recipe.RecipeType;
+import bg.restaurant.systems.software.integration.design.data.serve.ServeStyle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

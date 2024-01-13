@@ -2,7 +2,7 @@ package bg.restaurant.systems.software.integration.design.command.handlers.recip
 
 import bg.restaurant.systems.software.integration.design.command.handlers.CommandHandler;
 import bg.restaurant.systems.software.integration.design.command.validators.CommandsValidator;
-import bg.restaurant.systems.software.integration.design.storage.Restaurant;
+import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
 
 import java.sql.SQLException;
 

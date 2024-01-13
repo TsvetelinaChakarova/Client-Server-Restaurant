@@ -1,4 +1,6 @@
-package bg.restaurant.systems.software.integration.design.data;
+package bg.restaurant.systems.software.integration.design.data.drink;
+
+import bg.restaurant.systems.software.integration.design.data.serve.ServeStyle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

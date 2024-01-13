@@ -1,4 +1,4 @@
-package bg.restaurant.systems.software.integration.design;
+package bg.restaurant.systems.software.integration.design.storage;
 
 import java.sql.*;
 
