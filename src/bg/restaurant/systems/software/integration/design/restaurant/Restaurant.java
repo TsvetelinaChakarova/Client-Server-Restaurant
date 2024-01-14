@@ -1,7 +1,7 @@
 package bg.restaurant.systems.software.integration.design.restaurant;
 
-import bg.restaurant.systems.software.integration.design.storage.Queries;
 import bg.restaurant.systems.software.integration.design.data.recipe.Recipe;
+import bg.restaurant.systems.software.integration.design.storage.Queries;
 import com.google.gson.Gson;
 
 import java.sql.SQLException;

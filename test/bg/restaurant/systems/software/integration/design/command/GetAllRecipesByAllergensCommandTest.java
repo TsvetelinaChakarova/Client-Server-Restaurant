@@ -27,7 +27,7 @@ public class GetAllRecipesByAllergensCommandTest {
   // Mock the behavior of the RestaurantAPI
   // when calling the method to get recipes by allergens
   when(restaurant.getAllRecipesByAllergens(List.of(new String[]{"allergen1", "allergen2"})))
-    .thenReturn(List.of("recipe1", "recipe2"));
+    .thenReturn("recipe1, recipe2");
 
   // Execute the command
   String result = command.execute();

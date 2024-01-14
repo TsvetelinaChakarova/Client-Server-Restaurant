@@ -16,9 +16,9 @@ public class CommandCreatorTest {
         String clientInput = "createOrder 123";
         Command command = CommandCreator.newCommand(clientInput);
         assertNotNull(command);
-        assertEquals("createOrder", command.getCommandName());
-        assertEquals(1, command.getArguments().size());
-        assertEquals("123", command.getArguments().get(0));
+        assertEquals("createOrder", command.command());
+        assertEquals(1, command.arguments().length);
+        assertEquals("123", command.arguments()[0]);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class CommandCreatorTest {
         String clientInput = "unknownCommand";
         Command command = CommandCreator.newCommand(clientInput);
         assertNotNull(command);
-        assertEquals("Unknown", command.getCommandName());
-        assertTrue(command.getArguments().isEmpty());
+        assertEquals("Unknown", command.command());
+        assertTrue(command.arguments().length == 0);
     }
 }
