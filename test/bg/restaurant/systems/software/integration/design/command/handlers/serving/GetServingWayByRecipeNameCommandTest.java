@@ -1,5 +1,6 @@
-package bg.restaurant.systems.software.integration.design.command;
+package bg.restaurant.systems.software.integration.design.command.handlers.serving;
 
+import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.command.handlers.serving.GetServingWayByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,12 +23,13 @@ public class GetServingWayByRecipeNameCommandTest {
     }
 
     @Test
-    void testExecute_ValidCommand_ReturnsServingWay() throws SQLException {
+    void testExecuteValidCommandReturnsServingWay() throws SQLException {
         // Arrange
-        GetServingWayByRecipeNameCommand command = new GetServingWayByRecipeNameCommand(restaurant, args);
         String recipeName = "recipeName";
-        args[0] = CommandType.RECIPE_NAME.toString();
+        args[0] = CommandType.RECIPE_NAME.getCommandTypeString();
         args[1] = recipeName;
+
+        GetServingWayByRecipeNameCommand command = new GetServingWayByRecipeNameCommand(restaurant, args);
         String expectedServingWay = "Serving way for recipeName";
 
         // Act
@@ -39,7 +41,7 @@ public class GetServingWayByRecipeNameCommandTest {
     }
 
     @Test
-    void testExecute_InvalidCommand_ReturnsUnknownCommand() throws SQLException {
+    void testExecuteInvalidCommandReturnsUnknownCommand() throws SQLException {
         // Arrange
         GetServingWayByRecipeNameCommand command = new GetServingWayByRecipeNameCommand(restaurant, args);
         args[0] = "InvalidCommand";

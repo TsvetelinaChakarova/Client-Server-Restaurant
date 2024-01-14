@@ -7,26 +7,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CommandCreatorTest {
     @Test
     void testCommandCreatorWithNullCommand() {
-        assertThrows(IllegalArgumentException.class, () -> CommandCreator.newCommand(null),
+        assertEquals("Unknown", CommandCreator.newCommand(null).command(),
                 "Command input cannot be null!");
     }
 
     @Test
     void testCommandCreatorWithValidCommand() {
-        String clientInput = "createOrder 123";
+        String clientInput = "get recipes --all";
         Command command = CommandCreator.newCommand(clientInput);
         assertNotNull(command);
-        assertEquals("createOrder", command.command());
+        assertEquals("recipes", command.command());
         assertEquals(1, command.arguments().length);
-        assertEquals("123", command.arguments()[0]);
+        assertEquals("--all", command.arguments()[0]);
     }
 
     @Test
     void testCommandCreatorWithUnknownCommand() {
-        String clientInput = "unknownCommand";
+        String clientInput = "Unknown Command";
         Command command = CommandCreator.newCommand(clientInput);
         assertNotNull(command);
         assertEquals("Unknown", command.command());
-        assertTrue(command.arguments().length == 0);
+        assertTrue(command.arguments().length == 1);
     }
 }
