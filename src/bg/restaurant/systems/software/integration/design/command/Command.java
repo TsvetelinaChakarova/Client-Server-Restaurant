@@ -1,5 +1,7 @@
 package bg.restaurant.systems.software.integration.design.command;
 
+import java.util.List;
+
 public record Command(String command, String[] arguments) {
     public Command {
         if (command == null || command.isEmpty() || command.isBlank()) {
@@ -19,5 +21,13 @@ public record Command(String command, String[] arguments) {
 
     public static Command of(String command, String[] arguments) {
         return new Command(command, arguments);
+    }
+
+    public String getCommandName() {
+        return command;
+    }
+
+    public List<Object> getArguments() {
+        return List.of(arguments);
     }
 }

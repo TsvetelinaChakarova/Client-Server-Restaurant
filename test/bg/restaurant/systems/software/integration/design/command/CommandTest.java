@@ -15,51 +15,26 @@ public class CommandTest {
     }
 
     @Test
-    void testCommandNameWithNull() {
+    void testCommandNameWithInvalidInput() {
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command(null, new String[] {null}),
-            "Command must not accept null in command!");
-    }
-
-    @Test
-    void testCommandNameWithEmpty() {
+            "Command must not accept null or empty command name!");
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command("", new String[] {null}),
-            "Command must not accept null in command!");
-    }
-
-    @Test
-    void testCommandNameWithBlank() {
+            "Command must not accept null or empty command name!");
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command(" ", new String[] {null}),
-            "Command must not accept null in command!");
+            "Command must not accept null or empty command name!");
     }
 
     @Test
-    void testCommandArgsWithNull() {
+    void testCommandArgsWithInvalidInput() {
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command("null", null),
-            "Command must not accept null in command!");
-    }
-
-    @Test
-    void testAnyCommandArgWithNull() {
+            "Command must not accept null command arguments!");
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command("", new String[] {null}),
-            "Command must not accept null in command!");
-    }
-
-    @Test
-    void testAnyCommandArgWithEmpty() {
+            "Command must not accept null or empty command arguments!");
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command("", new String[] {""}),
-            "Command must not accept null in command!");
-    }
-
-    @Test
-    void testAnyCommandArgWithBlank() {
+            "Command must not accept null or empty command arguments!");
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command("", new String[] {"   "}),
-            "Command must not accept null in command!");
-    }
-
-    @Test
-    void testMAnyCommandArgWithBlank() {
+            "Command must not accept null or empty command arguments!");
         assertThrowsExactly(IllegalArgumentException.class, () -> new Command("", new String[] {"arg1", "       "}),
-            "Command must not accept null in command!");
+            "Command must not accept null or empty command arguments!");
     }
-
 }
