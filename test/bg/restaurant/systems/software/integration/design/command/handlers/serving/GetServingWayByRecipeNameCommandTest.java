@@ -1,7 +1,6 @@
 package bg.restaurant.systems.software.integration.design.command.handlers.serving;
 
 import bg.restaurant.systems.software.integration.design.command.CommandType;
-import bg.restaurant.systems.software.integration.design.command.handlers.serving.GetServingWayByRecipeNameCommand;
 import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

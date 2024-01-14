@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class GetAllergensByRecipeNameCommand extends CommandsValidator implements CommandHandler {
     private static final int NUMBER_OF_COMMAND_ARGS = 2;
     private final RestaurantAPI restaurant;
-    private final String[] args;
+    String[] args;
 
     public GetAllergensByRecipeNameCommand(RestaurantAPI restaurant, String[] args) {
         this.restaurant = restaurant;

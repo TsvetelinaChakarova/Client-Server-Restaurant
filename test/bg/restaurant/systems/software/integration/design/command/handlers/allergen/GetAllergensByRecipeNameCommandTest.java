@@ -36,19 +36,18 @@ public class GetAllergensByRecipeNameCommandTest {
         verify(restaurant, times(1)).getAllergensByRecipeName(recipeName);
     }
 
-//    тук се кара за args
-//    @Test
-//    public void testExecute_InvalidCommandType_ReturnsUnknownCommand() throws SQLException {
-//        // Arrange
-//        command.args = new String[]{"invalidCommandType", "Some Recipe"};
-//
-//        // Act
-//        String result = command.execute();
-//
-//        // Assert
-//        assertEquals("Unknown Command", result);
-//        verify(restaurant, never()).getAllergensByRecipeName(anyString());
-//    }
+    @Test
+    public void testExecute_InvalidCommandType_ReturnsUnknownCommand() throws SQLException {
+        // Arrange
+        command.args = new String[]{"invalidCommandType", "Some Recipe"};
+
+        // Act
+        String result = command.execute();
+
+        // Assert
+        assertEquals("Unknown Command", result);
+        verify(restaurant, never()).getAllergensByRecipeName(anyString());
+    }
 
     @Test
     public void testExecute_ValidRecipeNameWithNoAllergens_ReturnsNoAllergens() throws SQLException {
