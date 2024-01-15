@@ -10,7 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.mockito.Mockito.anyList;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GetAllRecipesByIngredientsCommandTest {
 
@@ -22,35 +27,28 @@ public class GetAllRecipesByIngredientsCommandTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        getAllRecipesByIngredientsCommand = new GetAllRecipesByIngredientsCommand(mockRestaurant, new String[]{"ingredient1", "ingredient2"});
+        getAllRecipesByIngredientsCommand =
+            new GetAllRecipesByIngredientsCommand(mockRestaurant, new String[] {"ingredient1", "ingredient2"});
     }
 
     @Test
     public void testExecute() throws SQLException {
-        // Arrange
         List<String> ingredients = List.of("ingredient1", "ingredient2");
-        when(mockRestaurant.getAllRecipesByIngredients(List.of(new String[] {"ingredient1", "ingredient2"}))).thenReturn("expectedResult");
+        when(
+            mockRestaurant.getAllRecipesByIngredients(List.of(new String[] {"ingredient1", "ingredient2"}))).thenReturn(
+            "expectedResult");
 
-        // Act
         String result = getAllRecipesByIngredientsCommand.execute();
 
-        // Assert
         assertEquals("expectedResult", result);
         verify(mockRestaurant, times(1)).getAllRecipesByIngredients(ingredients);
     }
 
     @Test
     public void testExecuteWithEmptyIngredients() throws SQLException {
-        // Arrange
-        getAllRecipesByIngredientsCommand = new GetAllRecipesByIngredientsCommand(mockRestaurant, new String[]{});
+        getAllRecipesByIngredientsCommand = new GetAllRecipesByIngredientsCommand(mockRestaurant, new String[] {});
 
-        // Act
-        String result = getAllRecipesByIngredientsCommand.execute();
-
-        // Assert
-        assertEquals("", result);
+        assertThrowsExactly(IllegalArgumentException.class, () -> getAllRecipesByIngredientsCommand.execute());
         verify(mockRestaurant, never()).getAllRecipesByIngredients(anyList());
     }
-
-    // Add more test methods as needed
 }

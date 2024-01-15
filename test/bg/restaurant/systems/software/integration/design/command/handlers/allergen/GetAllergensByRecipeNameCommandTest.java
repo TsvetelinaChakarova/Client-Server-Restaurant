@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.mockito.Mockito.*;
 
 
@@ -18,54 +19,48 @@ public class GetAllergensByRecipeNameCommandTest {
     @BeforeEach
     public void setUp() {
         restaurant = mock(RestaurantAPI.class);
-        command = new GetAllergensByRecipeNameCommand(restaurant, new String[0]);
+        command = new GetAllergensByRecipeNameCommand(restaurant, new String[] {"--recipe_name"});
     }
 
     @Test
-    public void testExecute_ValidRecipeName_ReturnsAllergens() throws SQLException {
-        // Arrange
+    public void testExecuteValidRecipeNameReturnsAllergens() throws SQLException {
         String recipeName = "Spaghetti Bolognese";
         String expectedAllergens = "Gluten, Dairy";
         when(restaurant.getAllergensByRecipeName(recipeName)).thenReturn(expectedAllergens);
 
-        // Act
+        command.args = new String[]{"--recipe_name", recipeName};
         String result = command.execute();
 
-        // Assert
         assertEquals(expectedAllergens, result);
         verify(restaurant, times(1)).getAllergensByRecipeName(recipeName);
     }
 
     @Test
-    public void testExecute_InvalidCommandType_ReturnsUnknownCommand() throws SQLException {
-        // Arrange
+    public void testExecuteInvalidCommandTypeReturnsUnknownCommand() throws SQLException {
         command.args = new String[]{"invalidCommandType", "Some Recipe"};
 
-        // Act
         String result = command.execute();
 
-        // Assert
         assertEquals("Unknown Command", result);
         verify(restaurant, never()).getAllergensByRecipeName(anyString());
     }
 
     @Test
-    public void testExecute_ValidRecipeNameWithNoAllergens_ReturnsNoAllergens() throws SQLException {
-        // Arrange
+    public void testExecuteValidRecipeNameWithNoAllergensReturnsNoAllergens() throws SQLException {
         String recipeName = "Vegan Salad";
         String expectedAllergens = "";
         when(restaurant.getAllergensByRecipeName(recipeName)).thenReturn(expectedAllergens);
 
-        // Act
-        command.args = new String[]{"recipeName", recipeName};
+        command.args = new String[]{"--recipe_name", recipeName};
         String result = command.execute();
 
-        // Assert
         assertEquals(expectedAllergens, result);
         verify(restaurant, times(1)).getAllergensByRecipeName(recipeName);
     }
 
-    // Add more test cases to cover other scenarios
-
+    @Test
+    public void testExecuteValidRecipeNameWithInsufficientArguments() {
+        command.args = new String[]{"--recipe_name"};
+        assertThrowsExactly(IllegalArgumentException.class, () -> command.execute());
+    }
 }
-

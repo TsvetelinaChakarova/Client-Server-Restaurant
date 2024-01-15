@@ -7,8 +7,6 @@ import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAP
 import java.sql.SQLException;
 
 public class GetAllRecipesCommand extends CommandsValidator implements CommandHandler {
-    private static final int NUMBER_OF_COMMAND_ARGS = 0;
-
     private final RestaurantAPI restaurant;
 
     public GetAllRecipesCommand(RestaurantAPI restaurant) {
@@ -17,8 +15,6 @@ public class GetAllRecipesCommand extends CommandsValidator implements CommandHa
 
     @Override
     public String execute() throws SQLException {
-        validateForExactlyNoArgs(NUMBER_OF_COMMAND_ARGS);
-
         return restaurant.getAllRecipes();
     }
 }

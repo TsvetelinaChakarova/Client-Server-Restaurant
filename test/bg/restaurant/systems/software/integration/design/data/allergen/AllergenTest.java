@@ -7,22 +7,17 @@ public class AllergenTest {
 
     @Test
     public void testAllergenConstructor_ValidName() {
-        // Arrange
         String validName = "Peanuts";
 
-        // Act
         Allergen allergen = new Allergen(validName);
 
-        // Assert
         Assertions.assertEquals(validName, allergen.name());
     }
 
     @Test
     public void testAllergenConstructor_NullName() {
-        // Arrange
         String nullName = null;
 
-        // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Allergen(nullName);
         });
@@ -30,10 +25,8 @@ public class AllergenTest {
 
     @Test
     public void testAllergenConstructor_EmptyName() {
-        // Arrange
         String emptyName = "";
 
-        // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Allergen(emptyName);
         });
@@ -41,10 +34,8 @@ public class AllergenTest {
 
     @Test
     public void testAllergenConstructor_BlankName() {
-        // Arrange
         String blankName = "   ";
 
-        // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Allergen(blankName);
         });

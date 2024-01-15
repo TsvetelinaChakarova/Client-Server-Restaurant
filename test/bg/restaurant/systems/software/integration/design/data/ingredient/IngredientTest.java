@@ -7,22 +7,16 @@ public class IngredientTest {
 
     @Test
     public void testIngredientCreation_ValidName() {
-        // Arrange
         String validName = "Tomato";
-
-        // Act
         Ingredient ingredient = new Ingredient(validName);
 
-        // Assert
         Assertions.assertEquals(validName, ingredient.name());
     }
 
     @Test
     public void testIngredientCreation_NullName() {
-        // Arrange
         String nullName = null;
 
-        // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Ingredient(nullName);
         });
@@ -30,10 +24,8 @@ public class IngredientTest {
 
     @Test
     public void testIngredientCreation_EmptyName() {
-        // Arrange
         String emptyName = "";
 
-        // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Ingredient(emptyName);
         });
@@ -41,10 +33,8 @@ public class IngredientTest {
 
     @Test
     public void testIngredientCreation_BlankName() {
-        // Arrange
         String blankName = "   ";
 
-        // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Ingredient(blankName);
         });

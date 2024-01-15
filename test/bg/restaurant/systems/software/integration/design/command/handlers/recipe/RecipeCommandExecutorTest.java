@@ -1,6 +1,5 @@
 package bg.restaurant.systems.software.integration.design.command.handlers.recipe;
 
-import bg.restaurant.systems.software.integration.design.command.CommandType;
 import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +7,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class RecipeCommandExecutorTest {
 
@@ -23,64 +27,57 @@ public class RecipeCommandExecutorTest {
     }
 
     @Test
-    public void testExecute_AllCommand() throws SQLException {
-        // Arrange
-        String[] arguments = {CommandType.ALL.toString()};
+    public void testExecuteWithAll() throws SQLException {
+        when(mockRestaurant.getAllRecipes()).thenReturn("All recipes");
+        String[] arguments = {"--all"};
 
-        // Act
         String result = recipeCommandExecutor.execute(arguments);
 
-        // Assert
-        // Add your assertions here
+        assertEquals("All recipes", result);
     }
 
     @Test
-    public void testExecute_TypeCommand() throws SQLException {
-        // Arrange
-        String[] arguments = {CommandType.TYPE.toString(), "type1", "type2"};
+    public void testExecuteWithType() throws SQLException {
+        when(mockRestaurant.getAllRecipesByType(any())).thenReturn("All recipes");
 
-        // Act
+        String[] arguments = {"--type", "breakfast"};
+
         String result = recipeCommandExecutor.execute(arguments);
 
-        // Assert
-        // Add your assertions here
+        assertEquals("All recipes", result);
     }
 
     @Test
-    public void testExecute_ListIngredientsCommand() throws SQLException {
-        // Arrange
-        String[] arguments = {CommandType.LIST_INGREDIENTS.toString(), "ingredient1", "ingredient2"};
+    public void testExecuteWithIngredients() throws SQLException {
+        when(mockRestaurant.getAllRecipesByIngredients(any())).thenReturn("All recipes");
 
-        // Act
+        String[] arguments = {"--ingredients", "salt", "pepper"};
+
         String result = recipeCommandExecutor.execute(arguments);
 
-        // Assert
-        // Add your assertions here
+        assertEquals("All recipes", result);
     }
 
     @Test
-    public void testExecute_ListAllergensCommand() throws SQLException {
-        // Arrange
-        String[] arguments = {CommandType.LIST_ALLERGENS.toString(), "allergen1", "allergen2"};
+    public void testExecuteWithAllergens() throws SQLException {
+        when(mockRestaurant.getAllRecipesByAllergens(any())).thenReturn("All recipes");
 
-        // Act
+        String[] arguments = {"--allergens", "milk", "gluten"};
+
         String result = recipeCommandExecutor.execute(arguments);
 
-        // Assert
-        // Add your assertions here
+        assertEquals("All recipes", result);
     }
 
     @Test
-    public void testExecute_UnknownCommand() throws SQLException {
-        // Arrange
-        String[] arguments = {"unknownCommand"};
-
-        // Act
-        String result = recipeCommandExecutor.execute(arguments);
-
-        // Assert
-        // Add your assertions here
+    public void testExecuteNullCommand() {
+        assertThrowsExactly(IllegalArgumentException.class, () -> recipeCommandExecutor.execute(null));
     }
 
-    // Add more test methods as needed
+    @Test
+    public void testExecuteWithNoSuchCommand() throws SQLException {
+        String[] arguments = {"--recipeName", " Spaghetti"};
+
+        assertEquals("Unknown command", recipeCommandExecutor.execute(arguments));
+    }
 }

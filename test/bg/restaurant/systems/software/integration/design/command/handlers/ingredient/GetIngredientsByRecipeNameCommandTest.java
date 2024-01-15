@@ -21,37 +21,29 @@ public class GetIngredientsByRecipeNameCommandTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        String[] args = {"recipe_name", "Pizza"};
+        String[] args = {"--recipe_name", "Pizza"};
         command = new GetIngredientsByRecipeNameCommand(mockRestaurant, args);
     }
 
     @Test
-    public void testExecute_ValidCommand_ReturnsIngredients() throws SQLException {
-        // Arrange
+    public void testExecuteValidCommandReturnsIngredients() throws SQLException {
         String expectedIngredients = "Flour, Tomato Sauce, Cheese";
         when(mockRestaurant.getIngredientsByRecipeName("Pizza")).thenReturn(expectedIngredients);
 
-        // Act
         String result = command.execute();
 
-        // Assert
         assertEquals(expectedIngredients, result);
         verify(mockRestaurant, times(1)).getIngredientsByRecipeName("Pizza");
     }
 
     @Test
-    public void testExecute_InvalidCommand_ReturnsUnknownCommand() throws SQLException {
-        // Arrange
+    public void testExecuteInvalidCommandReturnsUnknownCommand() throws SQLException {
         String[] args = {"invalid_command", "Pizza"};
         command = new GetIngredientsByRecipeNameCommand(mockRestaurant, args);
 
-        // Act
         String result = command.execute();
 
-        // Assert
         assertEquals("Unknown Command", result);
         verify(mockRestaurant, never()).getIngredientsByRecipeName(anyString());
     }
-
-    // Add more test methods as needed
 }

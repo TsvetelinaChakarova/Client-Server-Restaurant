@@ -27,6 +27,12 @@ public class CommandCreatorTest {
         Command command = CommandCreator.newCommand(clientInput);
         assertNotNull(command);
         assertEquals("Unknown", command.command());
-        assertTrue(command.arguments().length == 1);
+        assertEquals(1, command.arguments().length);
+    }
+
+    @Test
+    void testCommandCreatorCommandWithInsideQuotes() {
+        String clientInput = "get recipes --type [\"breakfast\"]";
+        assertEquals("recipes", CommandCreator.newCommand(clientInput).command());
     }
 }

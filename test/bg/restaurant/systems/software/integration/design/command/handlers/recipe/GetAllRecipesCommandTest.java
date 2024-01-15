@@ -3,6 +3,7 @@ package bg.restaurant.systems.software.integration.design.command.handlers.recip
 import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.sql.SQLException;
 
@@ -13,6 +14,8 @@ import static org.mockito.Mockito.when;
 public class GetAllRecipesCommandTest {
 
     private GetAllRecipesCommand getAllRecipesCommand;
+
+    @Mock
     private RestaurantAPI mockRestaurant;
 
     @BeforeEach
@@ -23,16 +26,12 @@ public class GetAllRecipesCommandTest {
 
     @Test
     public void testExecute() throws SQLException {
-        // Arrange
         String expectedOutput = "Mocked recipe data"; // Replace with your expected output
 
-        // Mock the behavior of the RestaurantAPI
         when(mockRestaurant.getAllRecipes()).thenReturn(expectedOutput);
 
-        // Act
         String actualOutput = getAllRecipesCommand.execute();
 
-        // Assert
         assertEquals(expectedOutput, actualOutput);
     }
 }

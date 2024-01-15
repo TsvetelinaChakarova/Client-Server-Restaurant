@@ -23,15 +23,10 @@ public class GetAllRecipesByAllergensCommandTest {
 
     @Test
     public void testExecute() throws SQLException {
-        // Mock the behavior of the RestaurantAPI
-        // when calling the method to get recipes by allergens
         when(restaurant.getAllRecipesByAllergens(List.of(new String[] {"allergen1", "allergen2"})))
             .thenReturn("recipe1, recipe2");
 
-        // Execute the command
         String result = command.execute();
-
-        // Verify the result
         assertEquals("recipe1, recipe2", result);
     }
 }

@@ -39,7 +39,7 @@ public class CommandExecutor extends CommandExecutorValidator {
                 case PREPARATION_TIME ->
                     new GetPreparationTimeForRecipeByNameCommand(restaurant, cmd.arguments()).execute();
                 case SERVE_WAY -> new GetServingWayByRecipeNameCommand(restaurant, cmd.arguments()).execute();
-                default -> "Unknown command";
+                default -> "Unknown Command";
             };
         } catch (Exception e) {
             try {

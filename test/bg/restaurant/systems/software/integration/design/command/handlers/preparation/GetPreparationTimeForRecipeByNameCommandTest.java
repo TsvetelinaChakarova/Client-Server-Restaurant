@@ -19,33 +19,27 @@ public class GetPreparationTimeForRecipeByNameCommandTest {
     @BeforeEach
     public void setUp() {
         restaurant = mock(RestaurantAPI.class);
-        args = new String[1];
+        args = new String[2];
     }
 
     @Test
-    public void testExecute_ValidRecipeName_ReturnsPreparationTime() throws SQLException {
-        // Your test code here
-    
-
-        // Arrange
+    public void testExecuteValidRecipeNameReturnsPreparationTime() throws SQLException {
         GetPreparationTimeForRecipeByNameCommand command = new GetPreparationTimeForRecipeByNameCommand(restaurant, args);
         String recipeName = "Spaghetti";
-        args[0] = CommandType.RECIPE_NAME.toString();
+        args[0] = CommandType.RECIPE_NAME.getCommandTypeString();
+        args[1] = recipeName;
 
         int expectedPreparationTime = 30;
 
-        // Act
         when(restaurant.getPreparationTimeForRecipeByName(recipeName)).thenReturn(String.valueOf(expectedPreparationTime));
         String result = command.execute();
 
-        // Assert
-
         assertEquals(String.valueOf(expectedPreparationTime), result);
-//        verify(restaurant, times(1)).getPreparationTimeForRecipeByName(recipeName);
+        verify(restaurant, times(1)).getPreparationTimeForRecipeByName(recipeName);
     }
 
     @Test
-    public void testExecute_UnknownCommand_ReturnsUnknownCommandMessage() throws SQLException {
+    public void testExecuteUnknownCommandReturnsUnknownCommandMessage() throws SQLException {
         String[] args = {"invalid", "recipeName"};
         GetPreparationTimeForRecipeByNameCommand command = new GetPreparationTimeForRecipeByNameCommand(restaurant, args);
 

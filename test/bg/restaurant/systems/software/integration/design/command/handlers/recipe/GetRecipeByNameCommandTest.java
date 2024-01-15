@@ -15,43 +15,41 @@ public class GetRecipeByNameCommandTest {
 
     @Mock
     private RestaurantAPI mockRestaurant;
-
     private GetRecipeByNameCommand getRecipeByNameCommand;
+    private String[] args;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        getRecipeByNameCommand = new GetRecipeByNameCommand(mockRestaurant, new String[0]);
+        args = new String[2];
     }
 
     @Test
-    public void testExecute_ValidRecipeName_ReturnsRecipe() throws SQLException {
-        // Arrange
+    public void testExecuteValidRecipeNameReturnsRecipe() throws SQLException {
+        getRecipeByNameCommand = new GetRecipeByNameCommand(mockRestaurant, args);
+        args[0] = "--recipe_name";
         String recipeName = "Pasta Carbonara";
         String expectedRecipe = "Recipe details for Pasta Carbonara";
 
+        args[1] = recipeName;
+
         when(mockRestaurant.getRecipeByName(recipeName)).thenReturn(expectedRecipe);
 
-        // Act
         String result = getRecipeByNameCommand.execute();
 
-        // Assert
         assertEquals(expectedRecipe, result);
     }
 
     @Test
-    public void testExecute_UnknownCommand_ReturnsUnknownCommandMessage() throws SQLException {
-        // Arrange
-        String[] args = {"INVALID_COMMAND", "Recipe Name"};
+    public void testExecuteUnknownCommandReturnsUnknownCommandMessage() throws SQLException {
+        getRecipeByNameCommand = new GetRecipeByNameCommand(mockRestaurant, new String[0]);
+
+        String[] args = {"INVALIDCOMMAND", "Recipe Name"};
         GetRecipeByNameCommand invalidCommand = new GetRecipeByNameCommand(mockRestaurant, args);
         String expectedMessage = "Unknown Command";
 
-        // Act
         String result = invalidCommand.execute();
 
-        // Assert
         assertEquals(expectedMessage, result);
     }
-
-    // Add more test methods as needed
 }

@@ -23,7 +23,6 @@ public class GetServingWayByRecipeNameCommandTest {
 
     @Test
     void testExecuteValidCommandReturnsServingWay() throws SQLException {
-        // Arrange
         String recipeName = "recipeName";
         args[0] = CommandType.RECIPE_NAME.getCommandTypeString();
         args[1] = recipeName;
@@ -31,25 +30,20 @@ public class GetServingWayByRecipeNameCommandTest {
         GetServingWayByRecipeNameCommand command = new GetServingWayByRecipeNameCommand(restaurant, args);
         String expectedServingWay = "Serving way for recipeName";
 
-        // Act
         when(restaurant.getServingWayByRecipeName(recipeName)).thenReturn(expectedServingWay);
         String result = command.execute();
 
-        // Assert
         assertEquals(expectedServingWay, result);
     }
 
     @Test
     void testExecuteInvalidCommandReturnsUnknownCommand() throws SQLException {
-        // Arrange
         GetServingWayByRecipeNameCommand command = new GetServingWayByRecipeNameCommand(restaurant, args);
         args[0] = "InvalidCommand";
         String expectedMessage = "Unknown Command";
 
-        // Act
         String result = command.execute();
 
-        // Assert
         assertEquals(expectedMessage, result);
     }
 }

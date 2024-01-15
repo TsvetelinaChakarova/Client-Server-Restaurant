@@ -9,7 +9,9 @@ import org.mockito.MockitoAnnotations;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GetAllDrinksCommandTest {
 
@@ -26,17 +28,12 @@ public class GetAllDrinksCommandTest {
 
     @Test
     public void testExecute() throws SQLException {
-        // Arrange
         String expectedDrinks = "Drink1, Drink2, Drink3";
         when(mockRestaurant.getAllDrinks()).thenReturn(expectedDrinks);
 
-        // Act
         String result = getAllDrinksCommand.execute();
 
-        // Assert
         assertEquals(expectedDrinks, result);
         verify(mockRestaurant, times(1)).getAllDrinks();
     }
-
-    // Add more test methods as needed
 }

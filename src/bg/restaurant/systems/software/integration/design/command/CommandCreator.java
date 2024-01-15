@@ -47,7 +47,7 @@ public class CommandCreator extends CommandsCreatorValidator {
         String[] args = tokens.subList(1, tokens.size()).toArray(new String[0]);
 
         if (validateGet(tokens.get(0)).equals(UNKNOWN_COMMAND)) {
-            return new Command("Unknown", new String[] {"command"});
+            return new Command("Unknown", new String[] {"Command"});
         }
 
         return new Command(args[0], Arrays.copyOfRange(args, 1, args.length));

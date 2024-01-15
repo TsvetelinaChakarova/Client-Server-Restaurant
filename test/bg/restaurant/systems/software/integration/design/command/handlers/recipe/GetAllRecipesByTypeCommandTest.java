@@ -27,17 +27,13 @@ public class GetAllRecipesByTypeCommandTest {
 
     @Test
     public void testExecute() throws SQLException {
-        // Arrange
         List<String> expectedRecipes = List.of("recipe1", "recipe2");
         when(mockRestaurant.getAllRecipesByType(List.of("type1", "type2"))).thenReturn(String.valueOf(expectedRecipes));
 
-        // Act
         String result = getAllRecipesByTypeCommand.execute();
 
-        // Assert
         assertEquals(expectedRecipes.toString(), result);
         verify(mockRestaurant, times(1)).getAllRecipesByType(List.of("type1", "type2"));
     }
 
-    // Add more test methods as needed
 }

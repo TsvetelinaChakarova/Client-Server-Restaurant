@@ -12,109 +12,101 @@ import java.util.Set;
 
 public class RecipeTest {
 
-   @Test
-public void testEmptyName() {
-    // Arrange
-    String name = "";
-    String type = "Italian";
-    String serveStyle = "Plate";
-    Set<Ingredient> ingredients = new HashSet<>();
-    ingredients.add(new Ingredient("Pasta"));
-    ingredients.add(new Ingredient("Bacon"));
-    int preparationTime = 30;
-    Set<Allergen> allergens = new HashSet<>();
-    allergens.add(new Allergen("Gluten"));
-    Set<Drink> suitableDrinks = new HashSet<>();
-    suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
+    @Test
+    public void testEmptyName() {
+        // Arrange
+        String name = "";
+        String type = "Italian";
+        String serveStyle = "Plate";
+        Set<Ingredient> ingredients = new HashSet<>();
+        ingredients.add(new Ingredient("Pasta"));
+        ingredients.add(new Ingredient("Bacon"));
+        int preparationTime = 30;
+        Set<Allergen> allergens = new HashSet<>();
+        allergens.add(new Allergen("Gluten"));
+        Set<Drink> suitableDrinks = new HashSet<>();
+        suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
 
-    // Act & Assert
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
-    });
-}
+        // Act & Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
+        });
+    }
 
-@Test
-public void testNullType() {
-    // Arrange
-    String name = "Pasta Carbonara";
-    String type = null;
-    String serveStyle = "Plate";
-    Set<Ingredient> ingredients = new HashSet<>();
-    ingredients.add(new Ingredient("Pasta"));
-    ingredients.add(new Ingredient("Bacon"));
-    int preparationTime = 30;
-    Set<Allergen> allergens = new HashSet<>();
-    allergens.add(new Allergen("Gluten"));
-    Set<Drink> suitableDrinks = new HashSet<>();
-    suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
+    @Test
+    public void testNullType() {
+        // Arrange
+        String name = "Pasta Carbonara";
+        String type = null;
+        String serveStyle = "Plate";
+        Set<Ingredient> ingredients = new HashSet<>();
+        ingredients.add(new Ingredient("Pasta"));
+        ingredients.add(new Ingredient("Bacon"));
+        int preparationTime = 30;
+        Set<Allergen> allergens = new HashSet<>();
+        allergens.add(new Allergen("Gluten"));
+        Set<Drink> suitableDrinks = new HashSet<>();
+        suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
 
-    // Act & Assert
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
-    });
-}
+        // Act & Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
+        });
+    }
 
-@Test
-public void testNullServeStyle() {
-    // Arrange
-    String name = "Pasta Carbonara";
-    String type = "Italian";
-    String serveStyle = null;
-    Set<Ingredient> ingredients = new HashSet<>();
-    ingredients.add(new Ingredient("Pasta"));
-    ingredients.add(new Ingredient("Bacon"));
-    int preparationTime = 30;
-    Set<Allergen> allergens = new HashSet<>();
-    allergens.add(new Allergen("Gluten"));
-    Set<Drink> suitableDrinks = new HashSet<>();
-    suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
+    @Test
+    public void testNullServeStyle() {
+        // Arrange
+        String name = "Pasta Carbonara";
+        String type = "Italian";
+        String serveStyle = null;
+        Set<Ingredient> ingredients = new HashSet<>();
+        ingredients.add(new Ingredient("Pasta"));
+        ingredients.add(new Ingredient("Bacon"));
+        int preparationTime = 30;
+        Set<Allergen> allergens = new HashSet<>();
+        allergens.add(new Allergen("Gluten"));
+        Set<Drink> suitableDrinks = new HashSet<>();
+        suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
 
-    // Act & Assert
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
-    });
-}
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
+        });
+    }
 
-@Test
-public void testEmptyIngredients() {
-    // Arrange
-    String name = "Pasta Carbonara";
-    String type = "Italian";
-    String serveStyle = "Plate";
-    Set<Ingredient> ingredients = new HashSet<>();
-    int preparationTime = 30;
-    Set<Allergen> allergens = new HashSet<>();
-    allergens.add(new Allergen("Gluten"));
-    Set<Drink> suitableDrinks = new HashSet<>();
-    suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
+    @Test
+    public void testEmptyIngredients() {
+        String name = "Pasta Carbonara";
+        String type = "Italian";
+        String serveStyle = "Plate";
+        Set<Ingredient> ingredients = new HashSet<>();
+        int preparationTime = 30;
+        Set<Allergen> allergens = new HashSet<>();
+        allergens.add(new Allergen("Gluten"));
+        Set<Drink> suitableDrinks = new HashSet<>();
+        suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
 
-    // Act & Assert
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
-    });
-}
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
+        });
+    }
 
-@Test
-public void testNegativePreparationTime() {
-    // Arrange
-    String name = "Pasta Carbonara";
-    String type = "Italian";
-    String serveStyle = "Plate";
-    Set<Ingredient> ingredients = new HashSet<>();
-    ingredients.add(new Ingredient("Pasta"));
-    ingredients.add(new Ingredient("Bacon"));
-    int preparationTime = -30;
-    Set<Allergen> allergens = new HashSet<>();
-    allergens.add(new Allergen("Gluten"));
-    Set<Drink> suitableDrinks = new HashSet<>();
-    suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
+    @Test
+    public void testNegativePreparationTime() {
+        String name = "Pasta Carbonara";
+        String type = "Italian";
+        String serveStyle = "Plate";
+        Set<Ingredient> ingredients = new HashSet<>();
+        ingredients.add(new Ingredient("Pasta"));
+        ingredients.add(new Ingredient("Bacon"));
+        int preparationTime = -30;
+        Set<Allergen> allergens = new HashSet<>();
+        allergens.add(new Allergen("Gluten"));
+        Set<Drink> suitableDrinks = new HashSet<>();
+        suitableDrinks.add(new Drink("Red Wine", "alcohol", "cold"));
 
-    // Act & Assert
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
-    });
-}
-
-    
-
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Recipe(name, type, serveStyle, ingredients, preparationTime, allergens, suitableDrinks);
+        });
+    }
 }

@@ -17,10 +17,10 @@ public class RestaurantTest {
     @BeforeEach
     public void setUp() {
         DatabaseConnection databaseConnection = new DatabaseConnection(
-                "jdbc:mysql://localhost:3306/restaurants", "root", "");
+            "jdbc:mysql://localhost:3306/restaurants", "root", "");
 
-        Queries queries = new Queries(databaseConnection); 
-        Gson gson = new Gson(); 
+        Queries queries = new Queries(databaseConnection);
+        Gson gson = new Gson();
         restaurant = new Restaurant(queries, gson);
     }
 
@@ -140,13 +140,9 @@ public class RestaurantTest {
 
     @Test
     public void testGetIngredientsByRecipeName() throws SQLException {
-        // Arrange
         String recipeName = "Recipe 1";
 
-        // Act
         String result = restaurant.getIngredientsByRecipeName(recipeName);
 
-        // Assert
-        // Add your assertions here
     }
 }
