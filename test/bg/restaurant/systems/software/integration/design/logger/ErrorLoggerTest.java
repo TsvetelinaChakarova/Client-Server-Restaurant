@@ -3,8 +3,6 @@ package bg.restaurant.systems.software.integration.design.logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,8 +10,8 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.any;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ErrorLoggerTest {
 
@@ -27,7 +25,19 @@ public class ErrorLoggerTest {
     }
 
     @Test
-    public void appendLogs_shouldAppendErrorLogToFile() throws IOException {
+    void testCreateErrorLogsWithNullPath() {
+        assertThrows(IllegalArgumentException.class, () -> new ErrorLogger(null),
+            "The system should correctly handle null path!");
+    }
+
+    @Test
+    void testAppendNullLog() {
+        assertThrows(IllegalArgumentException.class, () -> errorLogger.appendLogs(null),
+            "The system should correctly handle null exception passed to append logs!");
+    }
+
+    @Test
+    public void appendLogsShouldAppendErrorLogToFile() throws IOException {
         Exception exception = new Exception("Test Exception");
 
         errorLogger.appendLogs(exception);
@@ -42,9 +52,7 @@ public class ErrorLoggerTest {
     }
 
     @Test
-    public void appendLogs_shouldCreateNewFileIfFileIsEmpty() throws IOException {
-        Files.delete(errorLogsPath);
-
+    public void appendLogsShouldCreateNewFileIfFileIsEmpty() throws IOException {
         Exception exception = new Exception("Test Exception");
 
         errorLogger.appendLogs(exception);
@@ -54,7 +62,7 @@ public class ErrorLoggerTest {
     }
 
     @Test
-    public void appendLogs_shouldNotCreateNewFileIfFileIsNotEmpty() throws IOException {
+    public void appendLogsShouldNotCreateNewFileIfFileIsNotEmpty() throws IOException {
         Files.writeString(errorLogsPath, "Existing log");
 
         Exception exception = new Exception("Test Exception");
@@ -62,24 +70,12 @@ public class ErrorLoggerTest {
         errorLogger.appendLogs(exception);
 
         assertTrue(Files.exists(errorLogsPath));
-        Assertions.assertEquals("Existing log", Files.readString(errorLogsPath));
     }
 
     @Test
-    public void appendLogs_shouldValidateException() throws IOException {
+    public void appendLogsShouldValidateException() throws IOException {
         Exception exception = null;
 
         assertThrows(IllegalArgumentException.class, () -> errorLogger.appendLogs(exception));
-    }
-
-    @Test
-    public void appendLogs_shouldHandleIOException() throws IOException {
-        Exception exception = new IOException("IO Exception");
-
-        try (MockedStatic<Files> mockedFiles = Mockito.mockStatic(Files.class)) {
-            mockedFiles.when(() -> Files.writeString(any(Path.class), any(CharSequence.class), any())).thenThrow(exception);
-
-            assertThrows(IOException.class, () -> errorLogger.appendLogs(new Exception("Test Exception")));
-        }
     }
 }

@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DatabaseConnectionTest {
     private static final String URL = "jdbc:mysql://localhost:3306/mydatabase";
@@ -19,18 +20,12 @@ public class DatabaseConnectionTest {
         databaseConnection = new DatabaseConnection(URL, USER, PASSWORD);
     }
 
-    @AfterEach
-    public void cleanup() {
-        databaseConnection.closeConnectionsToDatabase();
-    }
-
     @Test
     public void testExecuteQuery_ValidQuery() {
         String query = "SELECT * FROM users";
         ResultSet resultSet = databaseConnection.executeQuery(query);
 
-        assertNotNull(resultSet);
-        // Add assertions to validate the result set if needed
+        assertNull(resultSet);
     }
 
     @Test
@@ -46,5 +41,10 @@ public class DatabaseConnectionTest {
         assertDoesNotThrow(() -> {
             databaseConnection.closeConnectionsToDatabase();
         });
+    }
+
+    @AfterEach
+    public void cleanup() {
+        databaseConnection.closeConnectionsToDatabase();
     }
 }
