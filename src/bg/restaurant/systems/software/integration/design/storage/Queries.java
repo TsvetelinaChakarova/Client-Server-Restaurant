@@ -176,7 +176,7 @@ public class Queries {
     public Set<Drink> getAllDrinksByRecipeName(String recipeName) throws SQLException {
         ResultSet resultSet = databaseConnection.executeQuery("""             
                 SELECT * FROM drinks
-                WHERE id = (
+                WHERE id IN (
                         SELECT drink_id FROM drinks_for_recipe
                         WHERE recipe_id = (
                             SELECT id FROM recipes
