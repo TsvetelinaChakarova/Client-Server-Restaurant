@@ -59,7 +59,7 @@ public class DrinkTest {
     }
 
     @Test
-    public void testDrinkConstructor_NullType_ThrowsIllegalArgumentException() {
+    public void testDrinkConstructorNullTypeThrowsIllegalArgumentException() {
         String name = "Coca Cola";
         String type = null;
         String serveStyle = "cold";
@@ -70,7 +70,7 @@ public class DrinkTest {
     }
 
     @Test
-    public void testDrinkConstructor_NullServeStyle_ThrowsIllegalArgumentException() {
+    public void testDrinkConstructorNullServeStyleThrowsIllegalArgumentException() {
         String name = "Coca Cola";
         String type = "non-alcoholic";
         String serveStyle = null;
@@ -81,7 +81,7 @@ public class DrinkTest {
     }
 
     @Test
-    public void testDrinkOf_ValidResultSet_Success() throws SQLException {
+    public void testDrinkOfValidResultSetSuccess() throws SQLException {
         ResultSet resultSet = createMockResultSet("Coca Cola", "non-alcoholic", "cold");
 
         Drink drink = Drink.of(resultSet);
