@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class AllergenTest {
 
     @Test
-    public void testAllergenConstructor_ValidName() {
+    public void testAllergenConstructorValidName() {
         String validName = "Peanuts";
 
         Allergen allergen = new Allergen(validName);
@@ -15,7 +15,7 @@ public class AllergenTest {
     }
 
     @Test
-    public void testAllergenConstructor_NullName() {
+    public void testAllergenConstructorNullName() {
         String nullName = null;
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -24,7 +24,7 @@ public class AllergenTest {
     }
 
     @Test
-    public void testAllergenConstructor_EmptyName() {
+    public void testAllergenConstructorEmptyName() {
         String emptyName = "";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -33,7 +33,7 @@ public class AllergenTest {
     }
 
     @Test
-    public void testAllergenConstructor_BlankName() {
+    public void testAllergenConstructorBlankName() {
         String blankName = "   ";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {

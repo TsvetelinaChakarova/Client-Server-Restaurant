@@ -15,42 +15,42 @@ public class ErrorLoggerValidatorTest {
     }
 
     @Test
-    public void validateErrorLogsPath_shouldThrowExceptionWhenPathIsNull() {
+    public void validateErrorLogsPathShouldThrowExceptionWhenPathIsNull() {
         String path = null;
 
         assertThrows(IllegalArgumentException.class, () -> errorLoggerValidator.validateErrorLogsPath(path));
     }
 
     @Test
-    public void validateErrorLogsPath_shouldThrowExceptionWhenPathIsEmpty() {
+    public void validateErrorLogsPathShouldThrowExceptionWhenPathIsEmpty() {
         String path = "";
 
         assertThrows(IllegalArgumentException.class, () -> errorLoggerValidator.validateErrorLogsPath(path));
     }
 
     @Test
-    public void validateErrorLogsPath_shouldThrowExceptionWhenPathIsBlank() {
+    public void validateErrorLogsPathShouldThrowExceptionWhenPathIsBlank() {
         String path = "   ";
 
         assertThrows(IllegalArgumentException.class, () -> errorLoggerValidator.validateErrorLogsPath(path));
     }
 
     @Test
-    public void validateErrorLogsPath_shouldNotThrowExceptionWhenPathIsValid() {
+    public void validateErrorLogsPathShouldNotThrowExceptionWhenPathIsValid() {
         String path = "/path/to/error/logs.txt";
 
         assertDoesNotThrow(() -> errorLoggerValidator.validateErrorLogsPath(path));
     }
 
     @Test
-    public void validateException_shouldThrowExceptionWhenExceptionIsNull() {
+    public void validateExceptionShouldThrowExceptionWhenExceptionIsNull() {
         Exception exception = null;
 
         assertThrows(IllegalArgumentException.class, () -> errorLoggerValidator.validateException(exception));
     }
 
     @Test
-    public void validateException_shouldNotThrowExceptionWhenExceptionIsNotNull() {
+    public void validateExceptionShouldNotThrowExceptionWhenExceptionIsNotNull() {
         Exception exception = new Exception("Test Exception");
 
         assertDoesNotThrow(() -> errorLoggerValidator.validateException(exception));

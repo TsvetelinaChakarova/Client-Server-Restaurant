@@ -24,7 +24,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateForExistingRecipe_RecipeExists_ThrowsException() {
+    public void testValidateForExistingRecipeRecipeExistsThrowsException() {
         Recipe existingRecipe =
             new Recipe("Pizza", "main", "hot", Set.of(new Ingredient("tomato")), 30, Set.of(new Allergen("eggs")),
                 Set.of(new Drink("coke", "fizzy", "cold")));
@@ -36,7 +36,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateForExistingRecipe_RecipeDoesNotExist_NoExceptionThrown() {
+    public void testValidateForExistingRecipeRecipeDoesNotExistNoExceptionThrown() {
         Recipe newRecipe =
             new Recipe("Pizza", "main", "hot", Set.of(new Ingredient("tomato")), 30, Set.of(new Allergen("eggs")),
                 Set.of(new Drink("coke", "fizzy", "cold")));
@@ -47,7 +47,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateRecipeForNull_NullRecipe_ThrowsException() {
+    public void testValidateRecipeForNullNullRecipeThrowsException() {
         Recipe nullRecipe = null;
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -56,7 +56,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateRecipeForNull_NonNullRecipe_NoExceptionThrown() {
+    public void testValidateRecipeForNullNonNullRecipeNoExceptionThrown() {
         Recipe nonNullRecipe =
             new Recipe("Burger", "main", "hot", Set.of(new Ingredient("meat")), 30, Set.of(new Allergen("eggs")),
                 Set.of(new Drink("coke", "fizzy", "cold")));
@@ -67,7 +67,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateIngredientString_NullIngredientName_ThrowsException() {
+    public void testValidateIngredientStringNullIngredientNameThrowsException() {
         String nullIngredientName = null;
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -76,7 +76,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateIngredientString_EmptyIngredientName_ThrowsException() {
+    public void testValidateIngredientStringEmptyIngredientNameThrowsException() {
         String emptyIngredientName = "";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -85,7 +85,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateIngredientString_BlankIngredientName_ThrowsException() {
+    public void testValidateIngredientStringBlankIngredientNameThrowsException() {
         String blankIngredientName = "   ";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -94,7 +94,7 @@ public class RestaurantValidatorTest {
     }
 
     @Test
-    public void testValidateIngredientString_ValidIngredientName_NoExceptionThrown() {
+    public void testValidateIngredientStringValidIngredientNameNoExceptionThrown() {
         String validIngredientName = "Tomato";
 
         Assertions.assertDoesNotThrow(() -> {

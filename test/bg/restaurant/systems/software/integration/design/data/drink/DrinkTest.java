@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 public class DrinkTest {
 
     @Test
-    public void testDrinkConstructor_ValidArguments_Success() {
+    public void testDrinkConstructorValidArgumentsSuccess() {
         // Arrange
         String name = "Coca Cola";
         String type = "non-alcoholic";
@@ -26,7 +26,7 @@ public class DrinkTest {
     }
 
     @Test
-    public void testDrinkConstructor_NullName_ThrowsIllegalArgumentException() {
+    public void testDrinkConstructorNullNameThrowsIllegalArgumentException() {
         String name = null;
         String type = "non-alcoholic";
         String serveStyle = "cold";
@@ -37,7 +37,7 @@ public class DrinkTest {
     }
 
     @Test
-    public void testDrinkConstructor_EmptyName_ThrowsIllegalArgumentException() {
+    public void testDrinkConstructorEmptyNameThrowsIllegalArgumentException() {
         String name = "";
         String type = "non-alcoholic";
         String serveStyle = "cold";
@@ -48,7 +48,7 @@ public class DrinkTest {
     }
 
     @Test
-    public void testDrinkConstructor_BlankName_ThrowsIllegalArgumentException() {
+    public void testDrinkConstructorBlankNameThrowsIllegalArgumentException() {
         String name = "   ";
         String type = "non-alcoholic";
         String serveStyle = "cold";

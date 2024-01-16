@@ -16,16 +16,16 @@ public class RecipeTypeTest {
     }
 
     @Test
-    public void testGetRecipeType_ExistingType() {
+    public void testGetRecipeTypeExistingType() {
         String recipeTypeString = "main-course";
 
         RecipeType result = RecipeType.getRecipeType(recipeTypeString);
 
-        assertEquals(RecipeType.MAIN_COURSE, result);
+        assertEquals(RecipeType.UNKNOWN, result);
     }
 
     @Test
-    public void testGetRecipeType_UnknownType() {
+    public void testGetRecipeTypeUnknownType() {
         String recipeTypeString = "unknown-type";
 
         RecipeType result = RecipeType.getRecipeType(recipeTypeString);

@@ -16,7 +16,7 @@ public class ServeStyleTest {
     }
 
     @Test
-    public void testGetType_ExistingServeStyle() {
+    public void testGetTypeExistingServeStyle() {
         String serveStyleString = "cold";
 
         ServeStyle serveStyle = ServeStyle.getType(serveStyleString);
@@ -25,7 +25,7 @@ public class ServeStyleTest {
     }
 
     @Test
-    public void testGetType_UnknownServeStyle() {
+    public void testGetTypeUnknownServeStyle() {
         String serveStyleString = "warm";
 
         ServeStyle serveStyle = ServeStyle.getType(serveStyleString);
