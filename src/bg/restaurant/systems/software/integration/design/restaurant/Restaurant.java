@@ -63,7 +63,7 @@ public class Restaurant extends RestaurantValidator implements RestaurantAPI {
     public String getServingWayByRecipeName(String recipeName) throws SQLException {
         var result = queries.getServingWayByRecipeName(recipeName);
 
-        return result == null ? NO_RESULT : gson.toJson(result);
+        return result == null ? NO_RESULT : gson.toJson(result.getTypeString());
     }
 
     @Override

@@ -25,7 +25,9 @@ public class RestaurantValidatorTest {
 
     @Test
     public void testValidateForExistingRecipe_RecipeExists_ThrowsException() {
-        Recipe existingRecipe = new Recipe("Pizza","main", "hot", Set.of(new Ingredient("tomato")), 30, Set.of(new Allergen("eggs")),Set.of(new Drink("coke", "fizzy", "cold")));
+        Recipe existingRecipe =
+            new Recipe("Pizza", "main", "hot", Set.of(new Ingredient("tomato")), 30, Set.of(new Allergen("eggs")),
+                Set.of(new Drink("coke", "fizzy", "cold")));
         recipeSet.add(existingRecipe);
 
         Assertions.assertThrows(RecipeAlreadyExistsException.class, () -> {
@@ -35,7 +37,9 @@ public class RestaurantValidatorTest {
 
     @Test
     public void testValidateForExistingRecipe_RecipeDoesNotExist_NoExceptionThrown() {
-        Recipe newRecipe = new Recipe("Pizza","main", "hot", Set.of(new Ingredient("tomato")), 30, Set.of(new Allergen("eggs")),Set.of(new Drink("coke", "fizzy", "cold")));
+        Recipe newRecipe =
+            new Recipe("Pizza", "main", "hot", Set.of(new Ingredient("tomato")), 30, Set.of(new Allergen("eggs")),
+                Set.of(new Drink("coke", "fizzy", "cold")));
 
         Assertions.assertDoesNotThrow(() -> {
             restaurantValidator.validateForExistingRecipe(newRecipe, recipeSet);
@@ -53,7 +57,9 @@ public class RestaurantValidatorTest {
 
     @Test
     public void testValidateRecipeForNull_NonNullRecipe_NoExceptionThrown() {
-        Recipe nonNullRecipe = new Recipe("Burger","main", "hot", Set.of(new Ingredient("meat")), 30, Set.of(new Allergen("eggs")),Set.of(new Drink("coke", "fizzy", "cold")));
+        Recipe nonNullRecipe =
+            new Recipe("Burger", "main", "hot", Set.of(new Ingredient("meat")), 30, Set.of(new Allergen("eggs")),
+                Set.of(new Drink("coke", "fizzy", "cold")));
 
         Assertions.assertDoesNotThrow(() -> {
             restaurantValidator.validateRecipeForNull(nonNullRecipe);

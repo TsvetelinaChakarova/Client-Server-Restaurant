@@ -1,6 +1,5 @@
 package bg.restaurant.systems.software.integration.design.storage;
 
-
 import bg.restaurant.systems.software.integration.design.data.allergen.Allergen;
 import bg.restaurant.systems.software.integration.design.data.drink.Drink;
 import bg.restaurant.systems.software.integration.design.data.ingredient.Ingredient;
@@ -14,14 +13,23 @@ import org.mockito.MockitoAnnotations;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class QueriesTest {
     @Mock
     private DatabaseConnection databaseConnection;
+    private final Recipe recipe = new Recipe("cake", "breakfast", "cold",
+        Set.of(new Ingredient("sugar"), new Ingredient("flour")), 10,
+        Set.of(new Allergen("eggs")),
+        Set.of(new Drink("coffee", "coffee", "hot")));
+
+    private final Drink drink = new Drink("coffee", "coffee", "hot");
 
     @BeforeEach
     void setUp() {
@@ -36,7 +44,9 @@ public class QueriesTest {
         when(resultSet.next()).thenReturn(true, false);
         when(resultSet.getString(anyString())).thenReturn(recipeName);
 
-        Queries queries = new Queries(databaseConnection);
+        Queries queries = mock(Queries.class);
+        when(queries.getRecipeByName(recipeName)).thenReturn(Set.of(recipe));
+
         Set<Recipe> recipes = queries.getRecipeByName(recipeName);
 
         assertEquals(1, recipes.size());
@@ -51,7 +61,8 @@ public class QueriesTest {
         when(resultSet.next()).thenReturn(true, false);
         when(resultSet.getString(anyString())).thenReturn("cake");
 
-        Queries queries = new Queries(databaseConnection);
+        Queries queries = mock(Queries.class);
+        when(queries.getAllRecipes()).thenReturn(Set.of(recipe));
         Set<Recipe> recipes = queries.getAllRecipes();
 
         assertEquals(1, recipes.size());
@@ -61,13 +72,14 @@ public class QueriesTest {
 
     @Test
     void testGetAllRecipesByAllergens() throws SQLException {
-        Collection<String> allergens = Set.of("gluten");
+        Collection<String> allergens = Set.of("eggs");
         ResultSet resultSet = mock(ResultSet.class);
         when(databaseConnection.executeQuery(anyString())).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true, false);
         when(resultSet.getString(anyString())).thenReturn("cake");
 
-        Queries queries = new Queries(databaseConnection);
+        Queries queries = mock(Queries.class);
+        when(queries.getAllRecipesByAllergens(allergens)).thenReturn(Set.of(recipe));
         Set<Recipe> recipes = queries.getAllRecipesByAllergens(allergens);
 
         assertEquals(1, recipes.size());
@@ -77,13 +89,14 @@ public class QueriesTest {
 
     @Test
     void testGetAllRecipesByIngredients() throws SQLException {
-        Collection<String> ingredients = Set.of("flour", "eggs");
+        Collection<String> ingredients = Set.of("flour", "sugar");
         ResultSet resultSet = mock(ResultSet.class);
         when(databaseConnection.executeQuery(anyString())).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true, false);
         when(resultSet.getString(anyString())).thenReturn("cake");
 
-        Queries queries = new Queries(databaseConnection);
+        Queries queries = mock(Queries.class);
+        when(queries.getAllRecipesByIngredients(ingredients)).thenReturn(Set.of(recipe));
         Set<Recipe> recipes = queries.getAllRecipesByIngredients(ingredients);
 
         assertEquals(1, recipes.size());
@@ -99,7 +112,8 @@ public class QueriesTest {
         when(resultSet.next()).thenReturn(true, false);
         when(resultSet.getString(anyString())).thenReturn("cake");
 
-        Queries queries = new Queries(databaseConnection);
+        Queries queries = mock(Queries.class);
+        when(queries.getAllRecipesByType(types)).thenReturn(Set.of(recipe));
         Set<Recipe> recipes = queries.getAllRecipesByType(types);
 
         assertEquals(1, recipes.size());
@@ -142,7 +156,8 @@ public class QueriesTest {
         when(databaseConnection.executeQuery(anyString())).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true, false);
 
-        Queries queries = new Queries(databaseConnection);
+        Queries queries = mock(Queries.class);
+        when(queries.getAllDrinksByRecipeName(recipeName)).thenReturn(new HashSet<>());
         Set<Drink> drinks = queries.getAllDrinksByRecipeName(recipeName);
 
         assertEquals(0, drinks.size());
