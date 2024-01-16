@@ -114,7 +114,7 @@ public class Queries {
                                                 """ + makeCollectionStringForQuery(ingredients) +
                 ")))";
 
-        ResultSet resultSet = databaseConnection.executeQuery(String.valueOf(query));
+        ResultSet resultSet = databaseConnection.executeQuery(query);
 
         return getRecipesForQueries(resultSet);
     }
