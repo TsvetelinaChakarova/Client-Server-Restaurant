@@ -36,17 +36,18 @@ public class CommandCreator extends CommandsCreatorValidator {
     }
 
     public static Command newCommand(String clientInput) {
+        clientInput = validateClientInput(clientInput);
+
         clientInput = clientInput
             .replaceAll("\\[", "")
             .replaceAll("]", "")
             .replaceAll(",", "");
-        clientInput = validateClientInput(clientInput);
 
         List<String> tokens = CommandCreator.getCommandArguments(clientInput);
         String[] args = tokens.subList(1, tokens.size()).toArray(new String[0]);
 
         if (validateGet(tokens.get(0)).equals(UNKNOWN_COMMAND)) {
-            return new Command("unknown", new String[] {"command"});
+            return new Command("Unknown", new String[] {"Command"});
         }
 
         return new Command(args[0], Arrays.copyOfRange(args, 1, args.length));

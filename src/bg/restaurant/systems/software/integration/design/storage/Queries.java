@@ -231,23 +231,23 @@ public class Queries {
     }
 
     // For testing purposes
-    public static void main(String[] args) throws SQLException {
-        DatabaseConnection databaseConnection = new DatabaseConnection(
-                "jdbc:mysql://localhost:3306/restaurants", "root", "");
-
-        Queries queries = new Queries(databaseConnection);
-        System.out.println(queries.getServingWayByRecipeName("cake"));
-        System.out.println(queries.getPreparationTimeForRecipeByName("cake"));
-        System.out.println(queries.getIngredientsByRecipeName("cake"));
-        System.out.println(queries.getAllergensByRecipeName("cake"));
-        System.out.println(queries.getAllDrinksByRecipeName("cake"));
-        System.out.println(queries.getAllDrinks());
-        System.out.println(queries.getAllRecipesByType(Set.of("breakfast")));
-        System.out.println();
-        System.out.println(queries.getAllRecipesByIngredients(Set.of("flour", "eggs")));
-        System.out.println();
-        System.out.println(queries.getAllRecipes());
-        System.out.println();
-        System.out.println(queries.getAllRecipesByAllergens(Set.of("gluten")));
-    }
+//    public static void main(String[] args) throws SQLException {
+//        DatabaseConnection databaseConnection = new DatabaseConnection(
+//                "jdbc:mysql://localhost:3306/restaurants", "root", "");
+//
+//        Queries queries = new Queries(databaseConnection);
+//        System.out.println(queries.getServingWayByRecipeName("cake"));
+//        System.out.println(queries.getPreparationTimeForRecipeByName("cake"));
+//        System.out.println(queries.getIngredientsByRecipeName("cake"));
+//        System.out.println(queries.getAllergensByRecipeName("cake"));
+//        System.out.println(queries.getAllDrinksByRecipeName("cake"));
+//        System.out.println(queries.getAllDrinks());
+//        System.out.println(queries.getAllRecipesByType(Set.of("breakfast")));
+//        System.out.println();
+//        System.out.println(queries.getAllRecipesByIngredients(Set.of("flour", "eggs")));
+//        System.out.println();
+//        System.out.println(queries.getAllRecipes());
+//        System.out.println();
+//        System.out.println(queries.getAllRecipesByAllergens(Set.of("gluten")));
+//    }
 }

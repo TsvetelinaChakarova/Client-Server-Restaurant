@@ -1,7 +1,7 @@
 package bg.restaurant.systems.software.integration.design.restaurant;
 
-import bg.restaurant.systems.software.integration.design.storage.Queries;
 import bg.restaurant.systems.software.integration.design.data.recipe.Recipe;
+import bg.restaurant.systems.software.integration.design.storage.Queries;
 import com.google.gson.Gson;
 
 import java.sql.SQLException;
@@ -63,7 +63,7 @@ public class Restaurant extends RestaurantValidator implements RestaurantAPI {
     public String getServingWayByRecipeName(String recipeName) throws SQLException {
         var result = queries.getServingWayByRecipeName(recipeName);
 
-        return result == null ? NO_RESULT : gson.toJson(result);
+        return result == null ? NO_RESULT : gson.toJson(result.getTypeString());
     }
 
     @Override

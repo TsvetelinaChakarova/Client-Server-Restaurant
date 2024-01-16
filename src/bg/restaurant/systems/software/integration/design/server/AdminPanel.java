@@ -1,11 +1,11 @@
 package bg.restaurant.systems.software.integration.design.server;
 
-import bg.restaurant.systems.software.integration.design.storage.DatabaseConnection;
-import bg.restaurant.systems.software.integration.design.storage.Queries;
 import bg.restaurant.systems.software.integration.design.command.CommandExecutor;
 import bg.restaurant.systems.software.integration.design.logger.ErrorLogger;
 import bg.restaurant.systems.software.integration.design.restaurant.Restaurant;
 import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAPI;
+import bg.restaurant.systems.software.integration.design.storage.DatabaseConnection;
+import bg.restaurant.systems.software.integration.design.storage.Queries;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

@@ -5,7 +5,7 @@ import bg.restaurant.systems.software.integration.design.restaurant.RestaurantAP
 
 public abstract class CommandExecutorValidator {
     protected void validateArgumentsLength(String[] args) {
-        if (args.length == 0) {
+        if (args == null || args.length == 0) {
             throw new IllegalArgumentException("There are not enough arguments to fulfil the request!");
         }
     }
