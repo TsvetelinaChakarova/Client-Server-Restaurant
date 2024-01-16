@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client {
@@ -19,6 +21,8 @@ public class Client {
     private static final int FILE_COMMAND_ARGUMENTS_COUNT = 6;
     private static final int PATH_ARGUMENT_INDEX = 4;
     private static final int INPUT_PATH_INDEX = 5;
+    private static final String WHITESPACE_REGEX = "\\s+";
+    private static final String SPACE_REGEX = " ";
 
     private static void printRestaurantInfo() {
         System.out.println("""
@@ -54,13 +58,13 @@ public class Client {
         System.out.println("Please enjoy your meal!\n");
     }
 
-    private static void createFile(String reply, String[] messageParts) throws IOException {
+    private static void createFile(String reply, List<String> messageParts) throws IOException {
         if (messageParts != null) {
-            if (messageParts.length == FILE_COMMAND_ARGUMENTS_COUNT &&
-                messageParts[PATH_ARGUMENT_INDEX].equals("--path") &&
-                !messageParts[INPUT_PATH_INDEX].isEmpty()) {
+            if (messageParts.size() == FILE_COMMAND_ARGUMENTS_COUNT &&
+                messageParts.get(PATH_ARGUMENT_INDEX).equals("--path") &&
+                !messageParts.get(INPUT_PATH_INDEX).isEmpty()) {
 
-                String pathFromInput = messageParts[INPUT_PATH_INDEX].replaceAll("\"", "");
+                String pathFromInput = messageParts.get(INPUT_PATH_INDEX).replaceAll("\"", "");
                 Path filePath = Path.of(pathFromInput);
                 File file = new File(pathFromInput);
 
@@ -85,6 +89,32 @@ public class Client {
         }
     }
 
+    private static List<String> getCommandArguments(String input) {
+        List<String> tokens = new LinkedList<>();
+        return getStrings(input, tokens);
+    }
+
+    public static List<String> getStrings(String input, List<String> tokens) {
+        StringBuilder s = new StringBuilder();
+
+        boolean insideQuote = false;
+
+        for (char c : input.toCharArray()) {
+            if (c == '"') {
+                insideQuote = !insideQuote;
+            }
+            if (c == ' ' && !insideQuote) {
+                tokens.add(s.toString().replace("\"", ""));
+                s.delete(0, s.length());
+            } else {
+                s.append(c);
+            }
+        }
+        tokens.add(s.toString().replace("\"", ""));
+
+        return tokens;
+    }
+
     public static void main(String[] args) {
 
         try (SocketChannel socketChannel = SocketChannel.open();
@@ -103,11 +133,11 @@ public class Client {
                     break;
                 }
 
-                String[] messageParts = null;
+                List<String> messageParts = null;
                 if (message.contains("get file --recipe_name")) {
-                    messageParts = message.split(" ");
+                    messageParts = getStrings(message, new LinkedList<>());
 
-                    message = "get recipe --recipe_name " + messageParts[3];
+                    message = "get recipe --recipe_name " + '"' + messageParts.get(3) + '"';
                 }
                 //System.out.println("Sending message {" + message + "} to the server...");
 

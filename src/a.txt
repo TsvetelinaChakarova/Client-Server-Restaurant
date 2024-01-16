@@ -1,0 +1,26 @@
+{
+  "name": "Spaghetti Bolognese",
+  "type": "main course",
+  "serveStyle": "hot",
+  "ingredients": [
+    {
+      "name": "eggs"
+    },
+    {
+      "name": "flour"
+    }
+  ],
+  "preparationTime": 30,
+  "allergens": [
+    {
+      "name": "gluten"
+    }
+  ],
+  "suitableDrinks": [
+    {
+      "name": "water",
+      "type": "non-alcoholic",
+      "serveStyle": "cold"
+    }
+  ]
+}

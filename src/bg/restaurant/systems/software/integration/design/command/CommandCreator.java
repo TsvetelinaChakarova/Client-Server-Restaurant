@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static bg.restaurant.systems.software.integration.design.client.Client.getStrings;
+
 public class CommandCreator extends CommandsCreatorValidator {
     private static final String WHITESPACE_REGEX = "\\s+";
     private static final String SPACE_REGEX = " ";
@@ -15,24 +17,7 @@ public class CommandCreator extends CommandsCreatorValidator {
         input = input.replaceAll(WHITESPACE_REGEX, SPACE_REGEX).strip();
 
         List<String> tokens = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-
-        boolean insideQuote = false;
-
-        for (char c : input.toCharArray()) {
-            if (c == '"') {
-                insideQuote = !insideQuote;
-            }
-            if (c == ' ' && !insideQuote) {
-                tokens.add(sb.toString().replace("\"", ""));
-                sb.delete(0, sb.length());
-            } else {
-                sb.append(c);
-            }
-        }
-        tokens.add(sb.toString().replace("\"", ""));
-
-        return tokens;
+        return getStrings(input, tokens);
     }
 
     public static Command newCommand(String clientInput) {
