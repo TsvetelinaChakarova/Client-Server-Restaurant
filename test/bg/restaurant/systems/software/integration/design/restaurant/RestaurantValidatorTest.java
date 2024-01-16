@@ -19,7 +19,7 @@ public class RestaurantValidatorTest {
 
     @BeforeEach
     public void setUp() {
-        restaurantValidator = new RestaurantValidator();
+        restaurantValidator = new RestaurantValidator() {};
         recipeSet = new HashSet<>();
     }
 

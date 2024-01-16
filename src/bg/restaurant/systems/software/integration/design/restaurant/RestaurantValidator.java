@@ -5,7 +5,7 @@ import bg.restaurant.systems.software.integration.design.exceptions.RecipeAlread
 
 import java.util.Set;
 
-public class RestaurantValidator {
+public abstract class RestaurantValidator {
     void validateForExistingRecipe(Recipe recipe, Set<Recipe> recipeSet) throws
             RecipeAlreadyExistsException {
         if (recipeSet.contains(recipe)) {

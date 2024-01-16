@@ -29,7 +29,7 @@ public class RestaurantTest {
     private Gson gson;
 
     private final Recipe recipe = new Recipe("cake", "breakfast", "cold",
-        Set.of(new Ingredient("sugar"), new Ingredient("flour")), 10,
+        Set.of(new Ingredient("sugar")), 10,
         Set.of(new Allergen("eggs")),
         Set.of(new Drink("coffee", "coffee", "hot")));
 
@@ -106,9 +106,9 @@ public class RestaurantTest {
         when(resultSet.next()).thenReturn(true, false);
         when(resultSet.getString(anyString())).thenReturn(recipeName);
 
-        when(queries.getAllRecipesByIngredients(List.of("sugar", "flour"))).thenReturn(Set.of(recipe));
+        when(queries.getAllRecipesByIngredients(List.of("sugar"))).thenReturn(Set.of(recipe));
 
-        String result = restaurant.getAllRecipesByIngredients(List.of("sugar", "flour"));
+        String result = restaurant.getAllRecipesByIngredients(List.of("sugar"));
         assertEquals(gson.toJson(List.of(recipe)), result);
     }
 
